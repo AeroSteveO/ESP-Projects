@@ -2,7 +2,7 @@
 These are my smaller ESP based projects
 
 # Projects
-- IKEA VINDRIKTNING PM2.5
+- [IKEA VINDRIKTNING PM2.5](vindriktning/README.md)
 - 
 
 # Additional Projects
