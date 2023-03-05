@@ -2,7 +2,7 @@
 - IKEA VINDRIKTNING
 - ESP D1 Mini
 
-# Add wiring information
+# Wiring Information
 Solder the 5V and GND pads in the IKEA sensor to the D1 Mini. The Rest pad is then wired to GPIO4 / D2 in the D1 mini for data.
 ![This is an image](assets/images/PXL_20220721_235824486.jpg)
 
