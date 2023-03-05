@@ -3,7 +3,7 @@
 - ESP D1 Mini
 
 # Wiring Information
-Solder the 5V and GND pads in the IKEA sensor to the D1 Mini. The Rest pad is then wired to GPIO4 / D2 in the D1 mini for data.
+The sensor has 5 copper pads at the top of the circuit board, these are for debugging, and will work great for our ESP to read the sensor data. I made the wires maybe 4in in length in order to let me open the device without having to disconnect everything. Solder the 5V and GND pads in the IKEA sensor to the D1 Mini. The Rest pad is then wired to GPIO4 / D2 in the D1 mini for data.
 ![This is an image](assets/images/PXL_20220721_235824486.jpg)
 
 ![This is an image](assets/images/PXL_20220721_235829167.jpg)
