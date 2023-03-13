@@ -29,6 +29,10 @@ uart:
   rx_pin: GPIO4
   baud_rate: 9600
 
+binary_sensor:
+  - platform: status
+    name: "Air Quality Status"
+    
 sensor:
   - platform: pm1006
     pm_2_5:
