@@ -1,18 +1,13 @@
 esphome:
-  name: wordclock
-  friendly_name: WordClock
+  name: "wordclock"
+  friendly_name: wordclock
+  libraries:
+#    - makuna/NeoPixelBus
+    - NeoPixel=https://github.com/adafruit/Adafruit_NeoPixel
+#    - NeoPixelBus=https://github.com/Makuna/NeoPixelBus.git
   includes:
     - wordclock.h
-#  on_boot:
-#    priority: 800
-#    then:
-#      - light.turn_on: 
-#          id: clockface
-#          brightness: 50%
-#          red: 100%
-#          green: 0%
-#          blue: 0%
-          
+
 esp8266:
   board: esp01_1m
 
@@ -38,29 +33,25 @@ wifi:
 
 captive_portal:
     
-i2c:
-  sda: 04
-  scl: 05
-
 sensor:
   - platform: adc
     pin: GPIO17
+    id: illuminance
     name: "Illuminance"
     update_interval: 10s
 
-light:
-  - platform: neopixelbus
-    id: clockface
-    type: GRB
-    variant: WS2812
-    pin: GPIO2
-    num_leds: 121
-    name: "Word Clock LEDs"
+# light:
+#   - platform: neopixelbus
+#     id: clockface
+#     type: GRB
+#     variant: WS2812
+#     pin: GPIO2
+#     num_leds: 121
+#     name: "Word Clock LEDs"
 
 time:
   - platform: homeassistant
     id: current_time
-    # 
     on_time_sync:
       then:
         - logger.log: "Synchronized system clock"
