@@ -1,5 +1,4 @@
 #include "esphome.h"
-// #include <NeoPixelBus.h>
 #include <Adafruit_NeoPixel.h>
 
 #define NUM_LEDS 121
@@ -9,7 +8,7 @@
 // needs: esphome time --> id: current_time
 
 int leds_time_it_is[] = {111,112,114,115}; // It Is
-// int leds_minutes[] = {121, 121, 121, 121}; // Minutes LEDS
+
 int leds_time_minutes[][15] = {
     {  5,   6,   7,   8,   9,  10,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1}, // OClock
     { 81,  80,  79,  78,  72,  73,  74,  75,  -1,  -1,  -1,  -1,  -1,  -1,  -1}, // five past
@@ -48,29 +47,21 @@ int blue = 124;
 int brightness = 50; // half brightness
 int prevLightReading = 0;
 
-// NeoPixelBus<NeoGrbFeature, NeoWs2812xMethod> strip(NUM_LEDS, DATA_PIN);
 Adafruit_NeoPixel pixels(NUM_LEDS, DATA_PIN, NEO_GRB + NEO_KHZ800);
-// NeoPixelRGBLightOutput<NeoGrbFeature, NeoWs2812xMethod> strip(NUM_LEDS, DATA_PIN);
 
 void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
-    // strip.SetPixelColor(i, RgbColor((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
     pixels.setPixelColor(i, pixels.Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
-    //pixels.setBrightness(brightness);
-
 }
 void show() {
     pixels.show();
-    // strip.Show();
 }
 
 void startStrip() {
     pixels.begin();
-    // strip.Begin();
 }
 
 void clearStrip() {
     pixels.clear();
-    // strip.ClearTo(0);
 }
 
 class Wordclock : public Component, public CustomAPIDevice {
@@ -79,9 +70,6 @@ class Wordclock : public Component, public CustomAPIDevice {
             startStrip();
             clearStrip();
             brightness = 50; // half brightness
-
-            //auto neopixellight = id(clockface);
-            //neopixellight.turn_on();
 
             // Start all LED with on and default color and brightness to check if everything is working...
             for(int i = 0; i < NUM_LEDS; i++) { setPixelColor(i, red, 0, 0, brightness); show(); delay(10); }
@@ -141,7 +129,6 @@ class Wordclock : public Component, public CustomAPIDevice {
             else {
                 // only update once in a Minute
                 if(h != hour || m != minute || isChanged) {
-                   //ESP_LOGD("loop", "Using b: %i rgb %i %i %i", brightness, red, green, blue);
                     hour = h;
                     minute = m;
                     if (hour >= 0 && time.is_valid() == true){
@@ -156,7 +143,6 @@ class Wordclock : public Component, public CustomAPIDevice {
                         for(int i = 0; i < 4; i++) {            setPixelColor(leds_time_it_is[i], red, green, blue, scaledBrightness); }
                         for(int i = 0; i < 15; i++) {           if(leds_time_minutes[tmp_minute][i] >= 0) { setPixelColor(leds_time_minutes[tmp_minute][i], red, green, blue, scaledBrightness); } }
                         for(int i = 0; i < 6; i++) {            if(leds_time_hours[tmp_hour][i] >= 0) { setPixelColor(leds_time_hours[tmp_hour][i], red, green, blue, scaledBrightness); } }
-//                        for(int i = 0; i < minutessum; i++) {   setPixelColor(leds_minutes[i], red, green, blue, brightness); }
                         show();
                         ESP_LOGD("loop", "Update Time: %i:%i  Brightness: %i RGB: %i-%i-%i", hour, minute, scaledBrightness, red, green, blue);
                         ESP_LOGD("loop", "Using tmp_hour: %i tmp_minute: %i minutessum: %i", tmp_hour, tmp_minute, minutessum);
