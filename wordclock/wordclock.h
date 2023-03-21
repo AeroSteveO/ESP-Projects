@@ -1,5 +1,5 @@
 #include "esphome.h"
-#include <NeoPixelBus.h>
+// #include <NeoPixelBus.h>
 #include <Adafruit_NeoPixel.h>
 
 #define NUM_LEDS 121
@@ -7,24 +7,23 @@
 
 // esphome dependencies:
 // needs: esphome time --> id: current_time
-// needs: esphome NeoPixelBus --> id: clockface
 
 int leds_time_it_is[] = {111,112,114,115}; // It Is
 // int leds_minutes[] = {121, 121, 121, 121}; // Minutes LEDS
-// int leds_time_minutes[][15] = {
-//     {101, 100,  99,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1}, // OClock
-//     {  7,   8,   9,  10,  41,  40,  39,  38,  -1,  -1,  -1,  -1,  -1,  -1,  -1}, // five past
-//     { 21,  20,  19,  18,  41,  40,  39,  38,  -1,  -1,  -1,  -1,  -1,  -1,  -1}, // ten past
-//     { 26,  27,  28,  29,  30,  31,  32,  41,  40,  39,  38,  -1,  -1,  -1,  -1}, // quarter after
-//     { 17,  16,  15,  15,  14,  13,  12,  11,  41,  40,  39,  38,  -1,  -1,  -1}, // twenty past
-//     {  7,   8,   9,  10,  37,  36,  35,  44,  45,  46,  47,  -1,  -1,  -1,  -1}, // 25 past
-//     { 44,  45,  46,  47,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1}, // half past
-//     {  7,   8,   9,  10,  41,  40,  39,  38,  44,  45,  46,  47,  -1,  -1,  -1}, // FÜNF, NACH, HALB
-//     { 17,  16,  15,  15,  14,  13,  12,  11,  37,  36,  35,  -1,  -1,  -1,  -1}, // twenty to
-//     { 22,  23,  24,  25,  26,  27,  28,  29,  30,  31,  32,  -1,  -1,  -1,  -1}, // 25 to
-//     { 21,  20,  19,  18,  37,  36,  35,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1}, // quarter to
-//     {  7,   8,   9,  10,  37,  36,  35,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1}  // five to
-// };
+int leds_time_minutes[][15] = {
+    {  5,   6,   7,   8,   9,  10,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1}, // OClock
+    { 81,  80,  79,  78,  72,  73,  74,  75,  -1,  -1,  -1,  -1,  -1,  -1,  -1}, // five past
+    { 95,  96,  97,  72,  73,  74,  75,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1}, // ten past
+    {100, 101, 102, 103, 104, 105, 106,  72,  73,  74,  75,  -1,  -1,  -1,  -1}, // quarter past
+    { 89,  90,  91,  92,  93,  94,  72,  73,  74,  75,  -1,  -1,  -1,  -1,  -1}, // twenty past
+    { 89,  90,  91,  92,  93,  94,  72,  73,  74,  75,  81,  80,  79,  78,  -1}, // 25 past
+    { 83,  84,  85,  86,  72,  73,  74,  75,  -1,  -1,  -1,  -1,  -1,  -1,  -1}, // half past
+    { 89,  90,  91,  92,  93,  94,  63,  64,  81,  80,  79,  78,  -1,  -1,  -1}, // 25 to
+    { 89,  90,  91,  92,  93,  94,  63,  64,  -1,  -1,  -1,  -1,  -1,  -1,  -1}, // twenty to
+    {100, 101, 102, 103, 104, 105, 106,  63,  64,  -1,  -1,  -1,  -1,  -1,  -1}, // quarter to
+    { 95,  96,  97,  63,  64,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1}, // 10 to
+    { 81,  80,  79,  78,  63,  64,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1}  // five to
+};
 
 int leds_time_hours[][6] = {
     { 56,  57,  58,  59,  60,  61}, // twelve
@@ -47,14 +46,13 @@ int red = 124;
 int green = 124;
 int blue = 124;
 int brightness = 50; // half brightness
+int prevLightReading = 0;
 
 // NeoPixelBus<NeoGrbFeature, NeoWs2812xMethod> strip(NUM_LEDS, DATA_PIN);
 Adafruit_NeoPixel pixels(NUM_LEDS, DATA_PIN, NEO_GRB + NEO_KHZ800);
 // NeoPixelRGBLightOutput<NeoGrbFeature, NeoWs2812xMethod> strip(NUM_LEDS, DATA_PIN);
 
 void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
-    // clockface.setPixelColor(i, r, g, b);
-    // clockface.turn_on();
     // strip.SetPixelColor(i, RgbColor((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
     pixels.setPixelColor(i, pixels.Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
     //pixels.setBrightness(brightness);
@@ -109,38 +107,40 @@ class Wordclock : public Component, public CustomAPIDevice {
             auto time = id(current_time).now();
             int h = time.hour;
             int m = time.minute;
-            // https://www.esphome.io/api/classesphome_1_1light_1_1_light_color_values.html LightColorValues Class
-            // auto neopixellight = id(clockface).current_values;
-            // //convert float 0.0 till 1.0 into int 0 till 255
-            // red = (int)(neopixellight.get_red()*255);
-            // green = (int)(neopixellight.get_green()*255);
-            // blue = (int)(neopixellight.get_blue()*255);
-            // brightness = 0;
-            // //check if light is on and set brightness
-            // if (neopixellight.get_state() > 0 ) {
-            //     brightness = (int)(neopixellight.get_brightness()*255);
-            //     // long value = (long) (id(illuminance).sample() * 500);
-            //     // brightness = map(value, 0, 500, 10, 200);
-            //     //ESP_LOGD("loop", "Brightness found as: %i", brightness);
-            // }
-            // else {
-                // ESP_LOGD("loop", "clockface state off - b: %i rgb %i %i %i", brightness, red, green, blue); delay(500);
-                //brightness = 128;
-                long value = (long) (id(illuminance).sample() * 500);
-                brightness = map(value, 0, 500, 10, 150);
-                //pixels.setBrightness(brightness);
-            // }
+            bool isChanged = false;
+            auto fastledlight2 = id(clockface).current_values;
+            //convert float 0.0 till 1.0 into int 0 till 255
+            int newRed = (int)(fastledlight2.get_red()*255);
+            int newGreen = (int)(fastledlight2.get_green()*255);
+            int newBlue = (int)(fastledlight2.get_blue()*255);
+            int newBrightness = (int)(fastledlight2.get_brightness()*255);
+            if (red != newRed || blue != newBlue || green != newGreen || brightness != newBrightness) {
+                red = newRed;
+                blue = newBlue;
+                green = newGreen;
+                brightness = newBrightness;
+                isChanged = true;
+            }
+
+            // Brightness set by the light sensor
+            long value = (long) (id(illuminance).sample() * 500);
+            int scaledBrightness = map(value, 0, 500, 10, brightness);
+            
+            if (value != prevLightReading) {
+                isChanged = true;
+            }
+
             //check if valid time. Blink red,green,blue until valid time is present
             if (time.is_valid() == false) {
                 ESP_LOGE("loop", "Got invalid time from current_time Time: %i:%i", h, m );
-                setPixelColor(0, 255, 0, 0, brightness); show(); delay(250);
-                setPixelColor(0, 0, 255, 0, brightness); show(); delay(250);
-                setPixelColor(0, 0, 0, 255, brightness); show(); delay(250);
-                setPixelColor(0, 0, 0, 0, brightness);   show();
+                setPixelColor(0, 255, 0, 0, scaledBrightness); show(); delay(250);
+                setPixelColor(0, 0, 255, 0, scaledBrightness); show(); delay(250);
+                setPixelColor(0, 0, 0, 255, scaledBrightness); show(); delay(250);
+                setPixelColor(0, 0, 0, 0, scaledBrightness);   show();
             }
             else {
                 // only update once in a Minute
-                if(h != hour || m != minute) {
+                if(h != hour || m != minute || isChanged) {
                    //ESP_LOGD("loop", "Using b: %i rgb %i %i %i", brightness, red, green, blue);
                     hour = h;
                     minute = m;
@@ -152,13 +152,13 @@ class Wordclock : public Component, public CustomAPIDevice {
                         tmp_hour = tmp_hour % 12;
                         int minutessum = minute % 5;
                         // Reset all LED
-                        for(int i = 0; i < NUM_LEDS; i++) {     setPixelColor(i, 0, 0, 0, brightness); }
-                        for(int i = 0; i < 4; i++) {            setPixelColor(leds_time_it_is[i], red, green, blue, brightness); }
-//                        for(int i = 0; i < 15; i++) {           if(leds_time_minutes[tmp_minute][i] >= 0) { setPixelColor(leds_time_minutes[tmp_minute][i], red, green, blue, brightness); } }
-                        for(int i = 0; i < 6; i++) {            if(leds_time_hours[tmp_hour][i] >= 0) { setPixelColor(leds_time_hours[tmp_hour][i], red, green, blue, brightness); } }
+                        for(int i = 0; i < NUM_LEDS; i++) {     setPixelColor(i, 0, 0, 0, scaledBrightness); }
+                        for(int i = 0; i < 4; i++) {            setPixelColor(leds_time_it_is[i], red, green, blue, scaledBrightness); }
+                        for(int i = 0; i < 15; i++) {           if(leds_time_minutes[tmp_minute][i] >= 0) { setPixelColor(leds_time_minutes[tmp_minute][i], red, green, blue, scaledBrightness); } }
+                        for(int i = 0; i < 6; i++) {            if(leds_time_hours[tmp_hour][i] >= 0) { setPixelColor(leds_time_hours[tmp_hour][i], red, green, blue, scaledBrightness); } }
 //                        for(int i = 0; i < minutessum; i++) {   setPixelColor(leds_minutes[i], red, green, blue, brightness); }
                         show();
-                        ESP_LOGD("loop", "Update Time: %i:%i  Brightness: %i RGB: %i-%i-%i", hour, minute, brightness, red, green, blue);
+                        ESP_LOGD("loop", "Update Time: %i:%i  Brightness: %i RGB: %i-%i-%i", hour, minute, scaledBrightness, red, green, blue);
                         ESP_LOGD("loop", "Using tmp_hour: %i tmp_minute: %i minutessum: %i", tmp_hour, tmp_minute, minutessum);
                     }
                 }
