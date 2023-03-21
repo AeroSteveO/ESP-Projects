@@ -7,7 +7,7 @@ The clock face and design is based off of https://github.com/mattudakis/ArduinoL
 
 ## Clock Face Lettering
 ```
-GITSISMRUKB
+GITSISMRUKB  
 HEAQUARTERI
 ATWENTYIENR
 PHALFRFIVET
@@ -15,9 +15,9 @@ PBAEYJPASTH
 YTOCTWELVED
 FIVEIGHTENA
 PTWONENINEY
-DTHREELEVEN
-TEFOURSEVEN
-JSIXJOCLOCK
+DTHREELEVEN   22 .......... 32
+TEFOURSEVEN   21 .......... 11
+JSIXJOCLOCK   0 ........... 10
 ```
 
 # To Do:
