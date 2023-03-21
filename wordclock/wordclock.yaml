@@ -40,14 +40,14 @@ sensor:
     name: "Illuminance"
     update_interval: 10s
 
-# light:
-#   - platform: neopixelbus
-#     id: clockface
-#     type: GRB
-#     variant: WS2812
-#     pin: GPIO2
-#     num_leds: 121
-#     name: "Word Clock LEDs"
+light:
+  - platform: neopixelbus
+    id: clockface
+    type: GRB
+    variant: WS2812
+    pin: GPIO15 # fake
+    num_leds: 1
+    name: "Word Clock LEDs"
 
 time:
   - platform: homeassistant
