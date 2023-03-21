@@ -5,6 +5,21 @@ The source is based off of https://github.com/leinich/ha-wordclock-esphome
 
 The clock face and design is based off of https://github.com/mattudakis/ArduinoLEDClock
 
+## Clock Face Lettering
+```
+GITSISMRUKB
+HEAQUARTERI
+ATWENTYIENR
+PHALFRFIVET
+PBAEYJPASTH
+YTOCTWELVED
+FIVEIGHTENA
+PTWONENINEY
+DTHREELEVEN
+TEFOURSEVEN
+JSIXJOCLOCK
+```
+
 # To Do:
 - ~~add a color selection option through HASS to control clock face color~~
 - save the recent color and use it on boot?
