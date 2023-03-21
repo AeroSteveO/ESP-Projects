@@ -3,7 +3,7 @@ This is an ESP controlled word clock based on a few different open source projec
 
 The source is based off of https://github.com/leinich/ha-wordclock-esphome
 
-The clock face and design is based off of 
+The clock face and design is based off of https://github.com/mattudakis/ArduinoLEDClock
 
 # To Do:
 - ~~add a color selection option through HASS to control clock face color~~
