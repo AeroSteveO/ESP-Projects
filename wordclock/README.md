@@ -19,6 +19,9 @@ DTHREELEVEN   22 .......... 32
 TEFOURSEVEN   21 .......... 11
 JSIXJOCLOCK   0 ........... 10
 ```
+## File Layout
+The sensor source code files will need to be put in home assistant at the following path. This can be done using the Visual Studio Code addon for home assistant which provides a nice IDE to use.
+- /config/esphome/wordclock.h
 
 # To Do:
 - ~~add a color selection option through HASS to control clock face color~~
