@@ -23,6 +23,12 @@ JSIXJOCLOCK   0 ........... 10
 The sensor source code files will need to be put in home assistant at the following path. This can be done using the Visual Studio Code addon for home assistant which provides a nice IDE to use.
 - /config/esphome/wordclock.h
 
+## Wiring
+ * GPIO 2 (D4) -> LED Strip Signal
+ * GPIO 17 (A0) -> Analog Light Sensor Input
+ * GPIO 4 (D2) -> Real time clock SDA
+ * GPIO 5 (D1) -> Real time clock SCL
+
 # To Do:
 - ~~add a color selection option through HASS to control clock face color~~
 - save the recent color and use it on boot?
