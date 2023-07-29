@@ -28,6 +28,7 @@ The sensor source code files will need to be put in home assistant at the follow
  * GPIO 17 (A0) -> Analog Light Sensor Input
  * GPIO 4 (D2) -> Real time clock SDA
  * GPIO 5 (D1) -> Real time clock SCL
+ * Make sure to run a positive and negative line directly from your input power to the front and rear of the LED strip. At full brightness, the last lights in the strip can end up with skewed colors due to voltage drop accross the entire length if there isn't a second power connection to the strip.
 
 # To Do:
 - ~~add a color selection option through HASS to control clock face color~~
