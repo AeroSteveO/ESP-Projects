@@ -133,7 +133,7 @@ class Wordclock : public Component, public CustomAPIDevice {
                 prevLightReading = scaledBrightness;
             }
 
-int bdBrightness = happy_birthday.get_brightness();
+            int bdBrightness = happy_birthday.get_brightness() * 100;
             int newRed = (int)(happy_birthday.get_red()*255);
             int newGreen = (int)(happy_birthday.get_green()*255);
             int newBlue = (int)(happy_birthday.get_blue()*255);
@@ -210,7 +210,7 @@ int bdBrightness = happy_birthday.get_brightness();
                         // Reset all LED
                         for(int i = 0; i < NUM_LEDS; i++) {  setPixelColor(i, 0, 0, 0, scaledBrightness); }
 
-if (bdBrightness > 0) {
+if (bdBrightness > 10) {
                 for (int j = 0; j < 2; j++)
                 {
                     for(int i = 0; i < 8; i++) {
