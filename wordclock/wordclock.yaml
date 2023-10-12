@@ -2,22 +2,21 @@ esphome:
   name: "wordclock"
   friendly_name: wordclock
   libraries:
-#    - makuna/NeoPixelBus
     - NeoPixel=https://github.com/adafruit/Adafruit_NeoPixel
-#    - NeoPixelBus=https://github.com/Makuna/NeoPixelBus.git
   includes:
     - wordclock.h
 
 esp8266:
   board: esp01_1m
-
+  framework:
+      version: latest
 # Enable logging
 logger:
 
 # Enable Home Assistant API
 api:
   encryption:
-    key: "biglongencryptionkey"
+    key: "UPWEZ06lRsf3I4XfF8ELbgLpaDDbx4GRWdiTFMG2Q2U="
 
 ota:
 
@@ -29,10 +28,14 @@ wifi:
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Esphome-Web-0B74C0"
-    password: "password here"
+    password: "gISnd4eyG0Lo"
 
 captive_portal:
     
+
+binary_sensor:
+  - platform: status
+    name: "WordClock Status"
 sensor:
   - platform: adc
     pin: GPIO17
@@ -48,6 +51,13 @@ light:
     pin: GPIO15 # fake
     num_leds: 1
     name: "Word Clock LEDs"
+  - platform: neopixelbus
+    id: happybirthday
+    type: GRB
+    variant: WS2812
+    pin: GPIO14 # fake
+    num_leds: 1
+    name: "Happy Birthday LEDs"
 
 time:
   - platform: homeassistant
@@ -55,6 +65,12 @@ time:
     on_time_sync:
       then:
         - logger.log: "Synchronized system clock"
+
+#switch:
+#  - platform: template
+#    name: "Birthday Lights"
+#    id: bday
+#    optimistic: True
 
 custom_component:
 - lambda: |-
