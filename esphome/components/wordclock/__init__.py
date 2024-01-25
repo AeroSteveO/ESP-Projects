@@ -25,7 +25,7 @@ def to_code(config):
         cg.add(var.set_clock_face_lights(light_face))
     
     if CONF_TIME in config:
-        sens = await time_.new_time(config[CONF_TIME])
+        sens = yield time_.new_time(config[CONF_TIME])
         cg.add(var.set_time(sens))
 
 #    if CONF_TEMPERATURE in config:
