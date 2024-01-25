@@ -1,5 +1,6 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
+from esphome.components import light, output
 from esphome.const import CONF_ID, CONF_OUTPUT_ID, CONF_OUTPUT, CONF_LIGHT
 
 wordclock_ns = cg.esphome_ns.namespace('wordclock')
