@@ -5,7 +5,7 @@
 #include "esphome/core/component.h"
 //#include "esphome/components/output/float_output.h"
 #include "esphome/components/light/light_output.h"
-
+#include "esphome/components/light/addressable_light.h"
 
 
 #define NUM_LEDS 121
@@ -23,7 +23,7 @@ class WordClock : public light::LightOutput, public Component {
 		void write_state(light::LightState *state) override;
         void loop() override;
 		void dump_config() override;
-		AddressableLight *clock_face{nullptr};
+		light::AddressableLight *clock_face{nullptr};
 		void set_clock_face_lights(Light *inputClockFace) { clock_face = inputClockFace; }
 	protected:
 		void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness);
