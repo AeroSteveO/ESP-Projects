@@ -3,6 +3,9 @@
 #include "esphome/core/log.h"
 #include "wordclock.h"
 
+namespace esphome {
+namespace wordclock {
+
 // esphome dependencies:
 // needs: esphome time --> id: current_time
 int thinking[][2] = {
@@ -67,10 +70,8 @@ int prevLightReading = 0;
 
 Adafruit_NeoPixel pixels(NUM_LEDS, DATA_PIN, NEO_GRB + NEO_KHZ800);
 
-
-class Wordclock : public Component, public CustomAPIDevice {
-    public:
-        void setup() override {
+static const char *TAG = "wordclock.WordClock";
+        void WordClock::setup() {
             startStrip();
             clearStrip();
             brightness = 50; // half brightness
@@ -85,7 +86,7 @@ class Wordclock : public Component, public CustomAPIDevice {
             register_service(&Wordclock::on_setled, "setled", {"number","red", "blue", "green"});
             Serial.println("WordClock Setup Complete!");
         }
-        void on_setled(int number, int red, int blue, int green) {
+        void WordClock::on_setled(int number, int red, int blue, int green) {
 
             if (number < NUM_LEDS || number > 0) {
                 ESP_LOGD("setled", "Setting led number %d to color %i %i %i", number, red, green, blue );
@@ -96,7 +97,10 @@ class Wordclock : public Component, public CustomAPIDevice {
                 ESP_LOGE("setled", "Not a valid LED Number - out of range");
             }
         }
-        void loop() override {
+		void WordClock::dump_config(){
+			ESP_LOGCONFIG(TAG, "WordClock");
+		}
+        void WordClock::loop() {
             auto time = id(current_time).now();
             int h = time.hour;
             int m = time.minute;
@@ -215,20 +219,22 @@ if (bdBrightness > 10) {
             }
         }
 		
-	protected:
-		void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
+		void WordClock::setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
 			pixels.setPixelColor(i, pixels.Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
 		}
-		void show() {
+		void WordClock::show() {
 			pixels.show();
 		}
 
-		void startStrip() {
+		void WordClock::startStrip() {
 			pixels.begin();
 		}
 
-		void clearStrip() {
+		void WordClock::clearStrip() {
 			pixels.clear();
 		}
 
 };
+
+} // namespace WordClock
+} // namespace esphome

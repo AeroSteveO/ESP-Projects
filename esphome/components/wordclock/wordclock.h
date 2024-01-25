@@ -1,16 +1,20 @@
+#pragma once
+
 #include "esphome.h"
 #include <Adafruit_NeoPixel.h>
+#include "esphome/core/component.h"
 
 #define NUM_LEDS 121
 #define DATA_PIN 2
 
 namespace esphome {
 namespace wordclock {
-class WordClock : public Component, public CustomAPIDevice {
+class WordClock : public Component {
     public:
         void setup() override;
         void on_setled(int number, int red, int blue, int green);
         void loop() override;
+		void dump_config() override;
 	protected:
 		void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness);
 		void show();
