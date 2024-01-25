@@ -133,7 +133,7 @@ int newBlue;
 int newGreen;
 
             // Brightness set by the light sensor
-            int brightness = (int)(fastledlight2->get_brightness()*255);
+            int brightness = 10;//(int)(fastledlight2->get_brightness()*255);
             long value = (long) (id(illuminance).sample() * 500);
             int scaledBrightness = map(value, 0, 500, 10, brightness);
             
@@ -161,9 +161,9 @@ int newGreen;
 
 
             //convert float 0.0 till 1.0 into int 0 till 255
-            newRed = (int)(fastledlight2->get_red()*255);
-            newGreen = (int)(fastledlight2->get_green()*255);
-            newBlue = (int)(fastledlight2->get_blue()*255);
+            newRed = (int)(fastledlight2->get(0).get_red()*255);
+            newGreen = (int)(fastledlight2->get(0).get_green()*255);
+            newBlue = (int)(fastledlight2->get(0).get_blue()*255);
             if (red != newRed || blue != newBlue || green != newGreen) {
                 red = newRed;
                 blue = newBlue;
