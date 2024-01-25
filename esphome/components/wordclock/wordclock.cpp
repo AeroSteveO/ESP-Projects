@@ -99,6 +99,21 @@ static const char *TAG = "wordclock.WordClock";
             }
         }
 		
+		
+		light::LightTraits WordClock::get_traits() {
+			auto traits = light::LightTraits();
+			traits.set_supports_brightness(true);
+			traits.set_supports_rgb(true);
+			traits.set_supports_rgb_white_value(false);
+			traits.set_supports_color_temperature(false);
+			return traits;
+		}
+
+		void WordClock::write_state(light::LightState *state) {
+
+		}
+		
+		
 		void WordClock::dump_config() {
 			ESP_LOGCONFIG(TAG, "WordClock");
 		}
@@ -109,8 +124,8 @@ static const char *TAG = "wordclock.WordClock";
             int m = time.minute;
             bool isChanged = false;
             bool birthday_changed = false;
-            auto fastledlight2 = id(clockface).current_values;
-            auto happy_birthday = id(happybirthday).current_values;
+            auto fastledlight2 = clock_face; //id(clockface).current_values;
+            //auto happy_birthday = id(happybirthday).current_values;
 
 
             
@@ -125,7 +140,7 @@ static const char *TAG = "wordclock.WordClock";
                 prevLightReading = scaledBrightness;
             }
 
-            int bdBrightness = happy_birthday.get_brightness() * 100;
+/*            int bdBrightness = happy_birthday.get_brightness() * 100;
             int newRed = (int)(happy_birthday.get_red()*255);
             int newGreen = (int)(happy_birthday.get_green()*255);
             int newBlue = (int)(happy_birthday.get_blue()*255);
@@ -140,7 +155,7 @@ static const char *TAG = "wordclock.WordClock";
             if (isChanged || birthday_changed)
             {
             }
-
+*/
 
 
             //convert float 0.0 till 1.0 into int 0 till 255
@@ -202,14 +217,14 @@ static const char *TAG = "wordclock.WordClock";
                         // Reset all LED
                         for(int i = 0; i < NUM_LEDS; i++) {  setPixelColor(i, 0, 0, 0, scaledBrightness); }
 
-if (bdBrightness > 10) {
+/* if (bdBrightness > 10) {
                 for (int j = 0; j < 2; j++)
                 {
                     for(int i = 0; i < 8; i++) {
                         if(leds_happy_birthday[j][i] >= 0) { setPixelColor(leds_happy_birthday[j][i], bdred, bdgreen, bdblue, scaledBrightness); }
                     }
                 }
-}
+} */
 
                         for(int i = 0; i < 4; i++) {         setPixelColor(leds_time_it_is[i], red, green, blue, scaledBrightness); }
                         for(int i = 0; i < 15; i++) {        if(leds_time_minutes[tmp_minute][i] >= 0) { setPixelColor(leds_time_minutes[tmp_minute][i], red, green, blue, scaledBrightness); } }
