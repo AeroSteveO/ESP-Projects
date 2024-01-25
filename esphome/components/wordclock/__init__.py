@@ -20,7 +20,7 @@ def to_code(config):
     yield cg.register_component(var, config)   
     
     if CONF_LIGHT in config:
-        light_face = yield light.register_light(var, config)
+        light_face = yield light.register_light(var, config[CONF_LIGHT])
         cg.add(var.set_clock_face_lights(light_face))
     
 #    if CONF_TEMPERATURE in config:
