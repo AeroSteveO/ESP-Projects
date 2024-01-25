@@ -10,7 +10,10 @@ CONFIG_SCHEMA = (
     cv.Schema(
         {
             cv.GenerateID(): cv.declare_id(WordClock),
-            cv.Required(CONF_LIGHT): light.AddressableLightState(),
+            cv.Required(CONF_LIGHT): light.BRIGHTNESS_ONLY_LIGHT_SCHEMA.extend({
+                cv.GenerateID(CONF_OUTPUT_ID): cv.declare_id(EmptyLightOutput),
+                cv.Required(CONF_OUTPUT): cv.use_id(output.FloatOutput)
+            }),
         },
     )
 ).extend(cv.COMPONENT_SCHEMA)
@@ -18,6 +21,9 @@ CONFIG_SCHEMA = (
 def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])    
     yield cg.register_component(var, config)   
+    
+    out = yield cg.get_variable(config[CONF_OUTPUT])
+    cg.add(var.set_output(out))
     
     if CONF_LIGHT in config:
         light = yield light.register_light(var, config)
