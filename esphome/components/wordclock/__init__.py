@@ -11,7 +11,6 @@ CONFIG_SCHEMA = (
         {
             cv.GenerateID(): cv.declare_id(WordClock),
             cv.Required(CONF_LIGHT): light.BRIGHTNESS_ONLY_LIGHT_SCHEMA.extend({
-                cv.GenerateID(CONF_OUTPUT_ID): cv.declare_id(EmptyLightOutput),
                 cv.Required(CONF_OUTPUT): cv.use_id(output.FloatOutput)
             }),
         },
