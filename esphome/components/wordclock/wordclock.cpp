@@ -86,6 +86,7 @@ static const char *TAG = "wordclock.WordClock";
             register_service(&Wordclock::on_setled, "setled", {"number","red", "blue", "green"});
             Serial.println("WordClock Setup Complete!");
         }
+		
         void WordClock::on_setled(int number, int red, int blue, int green) {
 
             if (number < NUM_LEDS || number > 0) {
@@ -97,9 +98,11 @@ static const char *TAG = "wordclock.WordClock";
                 ESP_LOGE("setled", "Not a valid LED Number - out of range");
             }
         }
-		void WordClock::dump_config(){
+		
+		void WordClock::dump_config() {
 			ESP_LOGCONFIG(TAG, "WordClock");
 		}
+		
         void WordClock::loop() {
             auto time = id(current_time).now();
             int h = time.hour;
@@ -233,8 +236,6 @@ if (bdBrightness > 10) {
 		void WordClock::clearStrip() {
 			pixels.clear();
 		}
-
-};
 
 } // namespace WordClock
 } // namespace esphome
