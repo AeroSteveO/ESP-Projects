@@ -1,5 +1,7 @@
 #include "esphome.h"
 #include <Adafruit_NeoPixel.h>
+#include "esphome/core/log.h"
+#include "wordclock.h"
 
 #define NUM_LEDS 121
 #define DATA_PIN 2
