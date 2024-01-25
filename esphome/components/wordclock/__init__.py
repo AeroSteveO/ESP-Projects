@@ -20,8 +20,8 @@ def to_code(config):
     yield cg.register_component(var, config)   
     
     if CONF_LIGHT in config:
-        light = yield light.register_light(var, config)
-        cg.add(var.set_clock_face_lights(light))
+        light_face = yield light.register_light(var, config)
+        cg.add(var.set_clock_face_lights(light_face))
     
 #    if CONF_TEMPERATURE in config:
 #        sens = await sensor.new_sensor(config[CONF_TEMPERATURE])
