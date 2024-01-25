@@ -70,20 +70,6 @@ int prevLightReading = 0;
 
 Adafruit_NeoPixel pixels(NUM_LEDS, DATA_PIN, NEO_GRB + NEO_KHZ800);
 
-void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
-    pixels.setPixelColor(i, pixels.Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
-}
-void show() {
-    pixels.show();
-}
-
-void startStrip() {
-    pixels.begin();
-}
-
-void clearStrip() {
-    pixels.clear();
-}
 
 class Wordclock : public Component, public CustomAPIDevice {
     public:
@@ -231,4 +217,21 @@ if (bdBrightness > 10) {
                 }
             }
         }
+		
+	protected:
+		void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
+			pixels.setPixelColor(i, pixels.Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
+		}
+		void show() {
+			pixels.show();
+		}
+
+		void startStrip() {
+			pixels.begin();
+		}
+
+		void clearStrip() {
+			pixels.clear();
+		}
+
 };
