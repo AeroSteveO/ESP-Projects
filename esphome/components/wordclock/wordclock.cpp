@@ -83,7 +83,7 @@ static const char *TAG = "wordclock.WordClock";
             for(int i = 0; i < NUM_LEDS; i++) { setPixelColor(i, 0, 0, 0, brightness); }
             show();
             randomSeed(analogRead(0));
-            register_service(&WordClock::on_setled, "setled", {"number","red", "blue", "green"});
+            //register_service(&WordClock::on_setled, "setled", {"number","red", "blue", "green"});
             Serial.println("WordClock Setup Complete!");
         }
 		
@@ -103,7 +103,7 @@ static const char *TAG = "wordclock.WordClock";
 		light::LightTraits WordClock::get_traits() {
 			auto traits = light::LightTraits();
 			traits.set_supported_color_modes({light::ColorMode::RGB});
-//			traits.set_supports_brightness(true);
+//			traits.set_supports_brightness(true); // these are deprecated and gone
 //			traits.set_supports_rgb(true);
 //			traits.set_supports_rgb_white_value(false);
 //			traits.set_supports_color_temperature(false);
@@ -120,7 +120,7 @@ static const char *TAG = "wordclock.WordClock";
 		}
 		
         void WordClock::loop() {
-            auto time = id(current_time).now();
+            auto time = clock.now();
             int h = time.hour;
             int m = time.minute;
             bool isChanged = false;

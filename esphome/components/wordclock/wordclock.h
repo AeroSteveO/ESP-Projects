@@ -6,7 +6,7 @@
 //#include "esphome/components/output/float_output.h"
 #include "esphome/components/light/light_output.h"
 #include "esphome/components/light/addressable_light.h"
-
+#include "esphome/components/time/real_time_clock.h"
 
 #define NUM_LEDS 121
 #define DATA_PIN 2
@@ -24,7 +24,9 @@ class WordClock : public light::LightOutput, public Component {
         void loop() override;
 		void dump_config() override;
 		light::AddressableLight *clock_face{nullptr};
+		time::RealTimeClock  *clock{nullptr};
 		void set_clock_face_lights(light::AddressableLight *inputClockFace) { clock_face = inputClockFace; }
+		void set_time(time::RealTimeClock  *inputTime) { clock = inputTime; }
 	protected:
 		void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness);
 		void show();
