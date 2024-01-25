@@ -9,7 +9,7 @@
 
 namespace esphome {
 namespace wordclock {
-class WordClock : public Component {
+class WordClock : public Component, public CustomAPIDevice {
     public:
         void setup() override;
         void on_setled(int number, int red, int blue, int green);
