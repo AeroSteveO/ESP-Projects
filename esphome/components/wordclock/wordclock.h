@@ -19,7 +19,7 @@ class WordClock : public light::LightOutput, public Component {
 		light::LightTraits get_traits() override;
         void setup() override;
         void on_setled(int number, int red, int blue, int green);
-		void set_output(output::FloatOutput *output) { output_ = output; }
+		//void set_output(output::FloatOutput *output) { output_ = output; }
 		void write_state(light::LightState *state) override;
         void loop() override;
 		void dump_config() override;
@@ -30,7 +30,7 @@ class WordClock : public light::LightOutput, public Component {
 		void show();
 		void startStrip();
 		void clearStrip();
-		output::FloatOutput *output_;
+		//output::FloatOutput *output_;
 };
 
 } // namespace wordclock
