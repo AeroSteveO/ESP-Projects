@@ -10,7 +10,7 @@ CONFIG_SCHEMA = (
     cv.Schema(
         {
             cv.GenerateID(): cv.declare_id(WordClock),
-            cv.Required(CONF_LIGHT): light.AddressableLightState(),
+            cv.Required(CONF_LIGHT): light.AddressableLight(),
         },
     )
 ).extend(cv.COMPONENT_SCHEMA)
