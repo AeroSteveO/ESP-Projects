@@ -128,8 +128,9 @@ static const char *TAG = "wordclock.WordClock";
             auto fastledlight2 = clock_face; //id(clockface).current_values;
             //auto happy_birthday = id(happybirthday).current_values;
 
-
-            
+int newRed;
+int newBlue;
+int newGreen;
 
             // Brightness set by the light sensor
             int brightness = (int)(fastledlight2.get_brightness()*255);
