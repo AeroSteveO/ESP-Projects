@@ -2,7 +2,7 @@
 #include <Adafruit_NeoPixel.h>
 #include "esphome/core/log.h"
 #include "wordclock.h"
-#include <TimeLib.h>     // for update/display of time
+//#include <TimeLib.h>     // for update/display of time
 
 namespace esphome {
 namespace wordclock {
