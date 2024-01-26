@@ -178,24 +178,23 @@ uint8 newGreen;
 
 
             //check if valid time. Blink red,green,blue until valid time is present
-            if (true == false) {
-//            if (time.is_valid() == false) {
-//                ESP_LOGE("loop", "Got invalid time from current_time Time: %i:%i", h, m );
-//                for (int i = 0; i < 8; i++) {
-//                    int random_number = random(1023);
-//                    int rRed = random(255);
-//                    int rGreen = random(255);
-//                    int rBlue = random(255);
-//                    if (random_number %2 == 1) {
-//                        setPixelColor(thinking[i][0], rRed, rGreen, rBlue, scaledBrightness); show();
-//                        delay(250);
-//                        setPixelColor(thinking[i][0], 0, 0, 0, scaledBrightness);   show();
-//                    } else {
-//                        setPixelColor(thinking[i][1], rRed, rGreen, rBlue, scaledBrightness); show();
-//                        delay(250);
-//                        setPixelColor(thinking[i][1], 0, 0, 0, scaledBrightness);   show();
-//                    }
-//                }
+            if (time.is_valid() == false) {
+                ESP_LOGE("loop", "Got invalid time from current_time Time: %i:%i", h, m );
+                for (int i = 0; i < 8; i++) {
+                    int random_number = random(1023);
+                    int rRed = random(255);
+                    int rGreen = random(255);
+                    int rBlue = random(255);
+                    if (random_number %2 == 1) {
+                        setPixelColor(thinking[i][0], rRed, rGreen, rBlue, scaledBrightness); show();
+                        delay(250);
+                        setPixelColor(thinking[i][0], 0, 0, 0, scaledBrightness);   show();
+                    } else {
+                        setPixelColor(thinking[i][1], rRed, rGreen, rBlue, scaledBrightness); show();
+                        delay(250);
+                        setPixelColor(thinking[i][1], 0, 0, 0, scaledBrightness);   show();
+                    }
+                }
                 // setPixelColor(0, 255, 0, 0, scaledBrightness); show(); delay(250);
                 // setPixelColor(0, 0, 255, 0, scaledBrightness); show(); delay(250);
                 // setPixelColor(0, 0, 0, 255, scaledBrightness); show(); delay(250);
