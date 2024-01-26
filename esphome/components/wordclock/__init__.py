@@ -15,7 +15,7 @@ CONFIG_SCHEMA = (
     cv.Schema(
         {
             cv.GenerateID(): cv.declare_id(WordClock),
-            cv.Required(CONF_LIGHT): light.ADDRESSABLE_LIGHT_SCHEMA.extend({}),
+            #cv.Required(CONF_LIGHT): light.ADDRESSABLE_LIGHT_SCHEMA.extend({}),
             #cv.Required(CONF_TIME): time_.TIME_SCHEMA.extend({}),
         },
     )
@@ -25,9 +25,9 @@ async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])    
     await cg.register_component(var, config)   
     
-    if CONF_LIGHT in config:
-        light_face = await light.new_light(var, config[CONF_LIGHT])
-        cg.add(var.set_clock_face_lights(light_face))
+#    if CONF_LIGHT in config:
+#        light_face = await light.register_light(var, config[CONF_LIGHT])
+#        cg.add(var.set_clock_face_lights(light_face))
     
 #    if CONF_TIME in config:
 #        sens = yield time_.new_time(config[CONF_TIME])

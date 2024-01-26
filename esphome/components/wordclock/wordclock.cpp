@@ -126,7 +126,7 @@ static const char *TAG = "wordclock.WordClock";
             int m = time.minute;
             bool isChanged = false;
             bool birthday_changed = false;
-            auto fastledlight2 = clock_face; //id(clockface).current_values;
+            //auto fastledlight2 = clock_face; //id(clockface).current_values;
             //auto happy_birthday = id(happybirthday).current_values;
 
 int newRed;
@@ -135,7 +135,7 @@ int newGreen;
 
             // Brightness set by the light sensor
             int brightness = 10;//(int)(fastledlight2->get_brightness()*255);
-            long value = (long) (id(illuminance).sample() * 500);
+            long value = 100; //(long) (id(illuminance).sample() * 500);
             int scaledBrightness = map(value, 0, 500, 10, brightness);
             
             if (10 < abs(scaledBrightness - prevLightReading) ) {
@@ -162,9 +162,9 @@ int newGreen;
 
 
             //convert float 0.0 till 1.0 into int 0 till 255
-            newRed = (int)(fastledlight2->get(0).get_red()*255);
-            newGreen = (int)(fastledlight2->get(0).get_green()*255);
-            newBlue = (int)(fastledlight2->get(0).get_blue()*255);
+            newRed = 100; //(int)(fastledlight2->get(0).get_red()*255);
+            newGreen = 100; //(int)(fastledlight2->get(0).get_green()*255);
+            newBlue = 100; //(int)(fastledlight2->get(0).get_blue()*255);
             if (red != newRed || blue != newBlue || green != newGreen) {
                 red = newRed;
                 blue = newBlue;
