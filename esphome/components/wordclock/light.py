@@ -13,9 +13,9 @@ CONFIG_SCHEMA = light.ADDRESSABLE_LIGHT_SCHEMA.extend({
 #    cv.Required(CONF_OUTPUT): cv.use_id(output.FloatOutput)
 })
 
-def to_code(config):
+async def to_code(config):
     var = cg.new_Pvariable(config[CONF_OUTPUT_ID])
-    yield light.register_light(var, config)
+    await light.register_light(var, config)
     
     if CONF_TIME_ID in config:
         time_ = await cg.get_variable(config[CONF_TIME_ID])
