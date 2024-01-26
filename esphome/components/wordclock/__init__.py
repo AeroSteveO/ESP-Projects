@@ -21,12 +21,12 @@ CONFIG_SCHEMA = (
     )
 ).extend(cv.COMPONENT_SCHEMA)
 
-def to_code(config):
+async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])    
-    yield cg.register_component(var, config)   
+    await cg.register_component(var, config)   
     
     if CONF_LIGHT in config:
-        light_face = yield light.register_light(var, config[CONF_LIGHT])
+        light_face = await light.new_light(var, config[CONF_LIGHT])
         cg.add(var.set_clock_face_lights(light_face))
     
 #    if CONF_TIME in config:
