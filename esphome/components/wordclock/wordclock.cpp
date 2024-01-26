@@ -123,10 +123,10 @@ Adafruit_NeoPixel pixels(NUM_LEDS, DATA_PIN, NEO_GRB + NEO_KHZ800);
 		}
 		
         void WordClock::loop() {
-            time_t time = now();
-			auto time_new = time_id_.now();
-            int h = hour(time);
-            int m = minute(time);
+//            time_t time = now();
+			ESPTime time = time_id_->now();
+            int h = time.hour;
+            int m = time.minute;
             bool isChanged = false;
             bool birthday_changed = false;
             //auto fastledlight2 = clock_face; //id(clockface).current_values;
