@@ -164,9 +164,9 @@ int newGreen;
 
 
             //convert float 0.0 till 1.0 into int 0 till 255
-            newRed = (int)(get(0).get_red()*255);
-            newGreen = (int)(get(0).get_green()*255);
-            newBlue = (int)(get(0).get_blue()*255);
+            newRed = (int)(clock_face->get(0).get_red()*255);
+            newGreen = (int)(clock_face->get(0).get_green()*255);
+            newBlue = (int)(clock_face->get(0).get_blue()*255);
             if (red != newRed || blue != newBlue || green != newGreen) {
                 red = newRed;
                 blue = newBlue;
