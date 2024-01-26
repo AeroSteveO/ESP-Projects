@@ -24,9 +24,9 @@ class WordClock : public light::LightOutput, public Component {
         void loop() override;
 		void dump_config() override;
 		light::AddressableLight *clock_face{nullptr};
-		time::RealTimeClock  *clock{nullptr};
+		time::RealTimeClock  *time_id_{nullptr};
 		void set_clock_face_lights(light::AddressableLight *inputClockFace) { clock_face = inputClockFace; }
-		void set_time(time::RealTimeClock  *inputTime) { clock = inputTime; }
+		void set_time_id(time::RealTimeClock *time_id) { this->time_id_ = time_id; }
 	protected:
 		void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness);
 		void show();
