@@ -121,9 +121,9 @@ static const char *TAG = "wordclock.WordClock";
 		}
 		
         void WordClock::loop() {
-            auto time = now();
-            int h = hour();
-            int m = minute();
+            time_t time = now();
+            int h = hour(time);
+            int m = minute(time);
             bool isChanged = false;
             bool birthday_changed = false;
             //auto fastledlight2 = clock_face; //id(clockface).current_values;
