@@ -7,6 +7,9 @@
 namespace esphome {
 namespace wordclock {
 
+
+static const char *TAG = "wordclock.light";
+
 // esphome dependencies:
 // needs: esphome time --> id: current_time
 int thinking[][2] = {
