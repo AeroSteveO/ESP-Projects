@@ -11,7 +11,7 @@ CONFIG_SCHEMA = (
         {
             cv.GenerateID(): cv.declare_id(WordClock),
             cv.Required(CONF_LIGHT): light.ADDRESSABLE_LIGHT_SCHEMA.extend({}),
-            cv.Required(CONF_TIME): time_.TIME_SCHEMA(
+            cv.Required(CONF_TIME): homeassistant.platform.time.schemas.CONFIG_SCHEMA(
                 
             ),
         },
