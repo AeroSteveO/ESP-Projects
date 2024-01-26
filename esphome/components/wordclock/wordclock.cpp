@@ -56,8 +56,8 @@ int leds_happy_birthday[][8] = {
     {120, 99, 98, 77, 76, 55, 54, 33} // birthday
 };
 
-int hour = -1;
-int minute = -1;
+int ihour = -1;
+int iminute = -1;
 int red = 124;
 int green = 124;
 int blue = 124;
@@ -208,16 +208,16 @@ int newGreen;
             //
             else {
                 // only update once in a Minute
-                if(h != hour || m != minute || isChanged) {
-                    hour = h;
-                    minute = m;
-                    if (hour >= 0){
-                        int tmp_hour = hour;
-                        int tmp_minute = (minute - (minute % 5));
+                if(h != ihour || m != iminute || isChanged) {
+                    ihour = h;
+                    iminute = m;
+                    if (ihour >= 0){
+                        int tmp_hour = ihour;
+                        int tmp_minute = (iminute - (iminute % 5));
                         if(tmp_minute >= 35) { tmp_hour += 1; }
                         tmp_minute = tmp_minute / 5;
                         tmp_hour = tmp_hour % 12;
-                        int minutessum = minute % 5;
+                        int minutessum = iminute % 5;
                         // Reset all LED
                         for(int i = 0; i < NUM_LEDS; i++) {  setPixelColor(i, 0, 0, 0, scaledBrightness); }
 
@@ -234,7 +234,7 @@ int newGreen;
                         for(int i = 0; i < 15; i++) {        if(leds_time_minutes[tmp_minute][i] >= 0) { setPixelColor(leds_time_minutes[tmp_minute][i], red, green, blue, scaledBrightness); } }
                         for(int i = 0; i < 6; i++) {         if(leds_time_hours[tmp_hour][i] >= 0) { setPixelColor(leds_time_hours[tmp_hour][i], red, green, blue, scaledBrightness); } }
                         show();
-                        // ESP_LOGD("loop", "Update Time: %i:%i  Brightness: %i RGB: %i-%i-%i", hour, minute, scaledBrightness, red, green, blue);
+                        // ESP_LOGD("loop", "Update Time: %i:%i  Brightness: %i RGB: %i-%i-%i", ihour, iminute, scaledBrightness, red, green, blue);
                         // ESP_LOGD("loop", "Using tmp_hour: %i tmp_minute: %i minutessum: %i", tmp_hour, tmp_minute, minutessum);
                     }
                 }
