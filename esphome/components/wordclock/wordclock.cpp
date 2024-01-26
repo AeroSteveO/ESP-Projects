@@ -8,7 +8,7 @@ namespace esphome {
 namespace wordclock {
 
 
-static const char *TAG = "wordclock.light";
+static const char *TAG = "wordclock.WordClock";
 
 // esphome dependencies:
 // needs: esphome time --> id: current_time
@@ -74,7 +74,6 @@ int prevLightReading = 0;
 
 Adafruit_NeoPixel pixels(NUM_LEDS, DATA_PIN, NEO_GRB + NEO_KHZ800);
 
-static const char *TAG = "wordclock.WordClock";
         void WordClock::setup() {
             startStrip();
             clearStrip();
