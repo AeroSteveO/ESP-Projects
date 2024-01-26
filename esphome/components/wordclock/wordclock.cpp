@@ -120,7 +120,7 @@ static const char *TAG = "wordclock.WordClock";
 		}
 		
         void WordClock::loop() {
-            auto time = clock.now();
+            auto time = now();
             int h = time.hour;
             int m = time.minute;
             bool isChanged = false;
