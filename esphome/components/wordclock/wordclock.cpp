@@ -61,13 +61,13 @@ int leds_happy_birthday[][8] = {
 
 int ihour = -1;
 int iminute = -1;
-int red = 124;
-int green = 124;
-int blue = 124;
+uint8_t red = 124;
+uint8_t green = 124;
+uint8_t blue = 124;
 
-int bdred = 0;
-int bdgreen = 0;
-int bdblue = 0;
+uint8_t bdred = 0;
+uint8_t bdgreen = 0;
+uint8_t bdblue = 0;
 
 int brightness = 50; // half brightness
 int prevLightReading = 0;
@@ -131,9 +131,9 @@ Adafruit_NeoPixel pixels(NUM_LEDS, DATA_PIN, NEO_GRB + NEO_KHZ800);
             //auto fastledlight2 = clock_face; //id(clockface).current_values;
             //auto happy_birthday = id(happybirthday).current_values;
 
-int newRed;
-int newBlue;
-int newGreen;
+uint8 newRed;
+uint8 newBlue;
+uint8 newGreen;
 
             // Brightness set by the light sensor
             int brightness = 10;//(int)(fastledlight2->get_brightness()*255);
@@ -146,9 +146,9 @@ int newGreen;
             }
 
 /*            int bdBrightness = happy_birthday.get_brightness() * 100;
-            int newRed = (int)(happy_birthday.get_red()*255);
-            int newGreen = (int)(happy_birthday.get_green()*255);
-            int newBlue = (int)(happy_birthday.get_blue()*255);
+            uint8 newRed = (happy_birthday.get_red());
+            uint8 newGreen = (happy_birthday.get_green());
+            uint8 newBlue = (happy_birthday.get_blue());
             if (bdred != newRed || bdblue != newBlue || bdgreen != newGreen) {
                 bdred = newRed;
                 bdblue = newBlue;
@@ -163,10 +163,9 @@ int newGreen;
 */
 
 
-            //convert float 0.0 till 1.0 into int 0 till 255
-            newRed = (int)(clock_face->get(0).get_red()*255);
-            newGreen = (int)(clock_face->get(0).get_green()*255);
-            newBlue = (int)(clock_face->get(0).get_blue()*255);
+            newRed = (clock_face->get(0).get_red());
+            newGreen = (clock_face->get(0).get_green());
+            newBlue = (clock_face->get(0).get_blue());
             if (red != newRed || blue != newBlue || green != newGreen) {
                 red = newRed;
                 blue = newBlue;
