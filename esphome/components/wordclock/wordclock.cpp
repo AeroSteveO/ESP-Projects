@@ -71,7 +71,7 @@ uint8_t bdblue = 0;
 int brightness = 50; // half brightness
 int prevLightReading = 0;
 
-Adafruit_NeoPixel pixels(NUM_LEDS, DATA_PIN, NEO_GRB + NEO_KHZ800);
+
 
         void WordClock::setup() {
             startStrip();
@@ -242,18 +242,18 @@ uint8 newGreen;
         }
 		
 		void WordClock::setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
-			pixels.setPixelColor(i, pixels.Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
+			pixels->setPixelColor(i, pixels->Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
 		}
 		void WordClock::show() {
-			pixels.show();
+			pixels->show();
 		}
 
 		void WordClock::startStrip() {
-			pixels.begin();
+			pixels->begin();
 		}
 
 		void WordClock::clearStrip() {
-			pixels.clear();
+			pixels->clear();
 		}
 
 } // namespace WordClock
