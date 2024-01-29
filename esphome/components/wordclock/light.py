@@ -2,7 +2,7 @@ import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import light, output, time
 from esphome.const import CONF_OUTPUT_ID, CONF_OUTPUT, CONF_TIME_ID, CONF_PIN, CONF_NUM_LEDS
-
+from esphome import pins
 
 empty_light_ns = cg.esphome_ns.namespace('wordclock')
 WordClock = empty_light_ns.class_('WordClock', light.LightOutput)
