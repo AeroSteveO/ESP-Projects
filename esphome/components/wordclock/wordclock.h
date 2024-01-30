@@ -40,15 +40,17 @@ class WordClock : public light::AddressableLight { // , public Component
 		  }
 		  int32_t size() const override { return this->pixels->numPixels(); }
 	protected:
-		uint8 getNthByte(uint32 bytes, uint8 byteToGet) {
+		uint8_t getNthByte(uint32_t bytes, uint8_t byteToGet) {
 			return (bytes >> (8*byteToGet)) & 0xff;
 		}
 		light::ESPColorView get_view_internal(int32_t index) const override {  // NOLINT
-			uint32 color = this->pixels->getPixelColor(index);
-			uint8 white = getNthByte(color, 0);
-			uint8 red = getNthByte(color, 1);
-			uint8 green = getNthByte(color, 2);
-			uint8 blue = getNthByte(color, 3);
+			uint32 color = pixels->getPixelColor(index);
+			
+			uint8_t white = getNthByte(color, 0);
+			uint8_t red = getNthByte(color, 1);
+			uint8_t green = getNthByte(color, 2);
+			uint8_t blue = getNthByte(color, 3);
+			
 			//uint8_t *base = this->pixels->getPixels();
 			return light::ESPColorView(&red, &green, &blue,
 				&white, 0, nullptr);
