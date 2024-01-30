@@ -136,7 +136,7 @@ uint8 newBlue;
 uint8 newGreen;
 
             // Brightness set by the light sensor
-            int brightness = 10;//(int)(fastledlight2->get_brightness()*255);
+            //int brightness = 10;//(int)(fastledlight2->get_brightness()*255);
             long value = 100; //(long) (id(illuminance).sample() * 500);
             int scaledBrightness = map(value, 0, 500, 10, brightness);
             
@@ -242,7 +242,13 @@ uint8 newGreen;
         }
 		
 		void WordClock::setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
-			pixels->setPixelColor(i, pixels->Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
+			//pixels->setPixelColor(i, pixels->Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
+			pixels->setPixelColor(i, pixels->Color(r , g, b));
+			//red = r;
+			//green = g;
+			//blue = b;
+			pixels->setBrightness(uiBrightness);
+			brightness = uiBrightness;
 		}
 		void WordClock::show() {
 			pixels->show();
