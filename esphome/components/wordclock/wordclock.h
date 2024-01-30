@@ -39,6 +39,11 @@ class WordClock : public light::AddressableLight, public Component {
 		  }
 		  int32_t size() const override { return this->pixels->numPixels(); }
 	protected:
+		light::ESPColorView get_view_internal(int32_t index) const override {  // NOLINT
+			uint8_t *base = this->pixels->getPixels() + 3ULL * index;
+			return light::ESPColorView(base + this->rgb_offsets_[0], base + this->rgb_offsets_[1], base + this->rgb_offsets_[2],
+				nullptr, this->effect_data_ + index, &this->correction_);
+		}
 		void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness);
 		void show();
 		void startStrip();
