@@ -14,7 +14,7 @@
 namespace esphome {
 namespace wordclock {
 	
-class WordClock : public light::AddressableLight, public Component {
+class WordClock : public light::AddressableLight { // , public Component
     public:
 		light::LightTraits get_traits() override;
         void setup() override;
@@ -40,7 +40,7 @@ class WordClock : public light::AddressableLight, public Component {
 		  int32_t size() const override { return this->pixels->numPixels(); }
 	protected:
 		light::ESPColorView get_view_internal(int32_t index) const override {  // NOLINT
-			uint8_t *base = this->pixels->getPixels() + 3ULL * index;
+			uint8_t *base = this->pixels->getPixels(); // + 3ULL * index;
 			return light::ESPColorView(&base[index + 0], &base[index + 1], &base[index + 2],
 				nullptr, nullptr, nullptr);
 		}
