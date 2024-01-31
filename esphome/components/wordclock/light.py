@@ -7,13 +7,15 @@ from esphome import pins
 empty_light_ns = cg.esphome_ns.namespace('wordclock')
 WordClock = empty_light_ns.class_('WordClock', light.LightOutput)
 
-CONFIG_SCHEMA = light.ADDRESSABLE_LIGHT_SCHEMA.extend({
-    cv.GenerateID(CONF_OUTPUT_ID): cv.declare_id(WordClock),
-    cv.Required(CONF_TIME_ID): cv.use_id(time.RealTimeClock),
-    cv.Required(CONF_PIN): pins.internal_gpio_output_pin_number, 
-    cv.Required(CONF_NUM_LEDS): cv.positive_not_null_int,
-#    cv.Required(CONF_OUTPUT): cv.use_id(output.FloatOutput)
-}).extend(cv.COMPONENT_SCHEMA)
+CONFIG_SCHEMA = cv.All(light.ADDRESSABLE_LIGHT_SCHEMA.extend({
+            cv.GenerateID(CONF_OUTPUT_ID): cv.declare_id(WordClock),
+            cv.Required(CONF_TIME_ID): cv.use_id(time.RealTimeClock),
+            cv.Required(CONF_PIN): pins.internal_gpio_output_pin_number, 
+            cv.Required(CONF_NUM_LEDS): cv.positive_not_null_int,
+        #    cv.Required(CONF_OUTPUT): cv.use_id(output.FloatOutput)
+        }
+    ).extend(cv.COMPONENT_SCHEMA)
+)
 
 async def to_code(config):
     var = cg.new_Pvariable(config[CONF_OUTPUT_ID])
