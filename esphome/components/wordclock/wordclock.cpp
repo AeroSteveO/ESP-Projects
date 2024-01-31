@@ -123,7 +123,7 @@ int prevLightReading = 0;
 			ESP_LOGCONFIG(TAG, "WordClock");
 		}
 		
-        void WordClock::loop() {
+        void WordClock::update_time() {
 //            time_t time = now();
 			ESPTime time = time_id_->now();
             int h = time.hour;
