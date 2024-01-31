@@ -31,6 +31,6 @@ async def to_code(config):
     
     # https://github.com/Makuna/NeoPixelBus/blob/master/library.json
     # Version Listed Here: https://registry.platformio.org/libraries/makuna/NeoPixelBus/versions
-    cg.add_library("adafruit/Adafruit NeoPixel", "latest")
+    cg.add_library("adafruit/Adafruit NeoPixel", "1.12.0")
 #    out = yield cg.get_variable(config[CONF_OUTPUT])
 #    cg.add(var.set_output(out))
