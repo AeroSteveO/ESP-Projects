@@ -73,7 +73,7 @@ int prevLightReading = 0;
 
 
 
-        void WordClock::setup() override {
+        void WordClock::setup() {
 			this->effect_data_ = new uint8_t[this->size()];  
 			
             startStrip();
@@ -114,7 +114,7 @@ int prevLightReading = 0;
 			return traits;
 		}
 
-		void WordClock::write_state(light::LightState *state) override {
+		void WordClock::write_state(light::LightState *state) {
 			show();
 		}
 		
