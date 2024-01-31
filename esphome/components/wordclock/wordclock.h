@@ -14,7 +14,7 @@
 namespace esphome {
 namespace wordclock {
 	
-class WordClock : public light::AddressableLight { // , public Component
+class WordClock : public light::AddressableLight, public Component {
     public:
 		light::LightTraits get_traits() override;
         void setup() override;
