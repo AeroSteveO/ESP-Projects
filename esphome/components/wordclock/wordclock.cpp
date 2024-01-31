@@ -244,6 +244,7 @@ int prevLightReading = 0;
 		void WordClock::setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
 			//pixels->setPixelColor(i, pixels->Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
 			//pixels->setPixelColor(i, pixels->Color(r , g, b));
+			ESP_LOGI("setPixelColor", "Changing Colors");
 			newRed = r;
 			newGreen = g;
 			newBlue = b;
