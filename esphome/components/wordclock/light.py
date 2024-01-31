@@ -4,8 +4,8 @@ from esphome.components import light, output, time
 from esphome.const import CONF_OUTPUT_ID, CONF_OUTPUT, CONF_TIME_ID, CONF_PIN, CONF_NUM_LEDS
 from esphome import pins
 
-empty_light_ns = cg.esphome_ns.namespace('wordclock')
-WordClock = empty_light_ns.class_('WordClock', light.LightOutput)
+wordclock_ns = cg.esphome_ns.namespace('wordclock')
+WordClock = wordclock_ns.class_('WordClock', light.AddressableLight)
 
 CONFIG_SCHEMA = cv.All(light.ADDRESSABLE_LIGHT_SCHEMA.extend({
             cv.GenerateID(CONF_OUTPUT_ID): cv.declare_id(WordClock),
