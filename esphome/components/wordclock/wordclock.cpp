@@ -74,6 +74,9 @@ int prevLightReading = 0;
 
 
         void WordClock::setup() {
+			for (int i = 0; i < this->size(); i++) {
+			  (*this)[i] = Color(0, 0, 0, 0);
+			}
 			this->effect_data_ = new uint8_t[this->size()];  
 			
             startStrip();
