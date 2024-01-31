@@ -94,26 +94,22 @@ int prevLightReading = 0;
             Serial.println("WordClock Setup Complete!");
         }
 		
-        void WordClock::on_setled(int number, int red, int blue, int green) {
-
-            if (number < NUM_LEDS || number > 0) {
-                ESP_LOGD("setled", "Setting led number %d to color %i %i %i", number, red, green, blue );
-                setPixelColor(number, red, green, blue, brightness);
-                show();
-            }
-            else {
-                ESP_LOGE("setled", "Not a valid LED Number - out of range");
-            }
-        }
+//        void WordClock::on_setled(int number, int red, int blue, int green) {
+//
+//            if (number < NUM_LEDS || number > 0) {
+//                ESP_LOGD("setled", "Setting led number %d to color %i %i %i", number, red, green, blue );
+//                setPixelColor(number, red, green, blue, brightness);
+//                show();
+//            }
+//            else {
+//                ESP_LOGE("setled", "Not a valid LED Number - out of range");
+//            }
+//        }
 		
 		
 		light::LightTraits WordClock::get_traits() {
 			auto traits = light::LightTraits();
 			traits.set_supported_color_modes({light::ColorMode::RGB});
-//			traits.set_supports_brightness(true); // these are deprecated and gone
-//			traits.set_supports_rgb(true);
-//			traits.set_supports_rgb_white_value(false);
-//			traits.set_supports_color_temperature(false);
 			return traits;
 		}
 
@@ -127,13 +123,12 @@ int prevLightReading = 0;
 		}
 		
         void WordClock::update_time() {
-//            time_t time = now();
+
 			ESPTime time = time_id_->now();
             int h = time.hour;
             int m = time.minute;
             bool isChanged = false;
             bool birthday_changed = false;
-            //auto fastledlight2 = clock_face; //id(clockface).current_values;
             //auto happy_birthday = id(happybirthday).current_values;
 
 uint8 newRed;
