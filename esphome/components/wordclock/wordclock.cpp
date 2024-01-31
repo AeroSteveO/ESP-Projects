@@ -162,10 +162,10 @@ uint8 newGreen;
             }
 */
 
-
-            newRed = (clock_face->get(0).get_red());
-            newGreen = (clock_face->get(0).get_green());
-            newBlue = (clock_face->get(0).get_blue());
+			uint32 color = pixels->getPixelColor(0);
+			uint8_t newRed = getNthByte(color, 1);
+			uint8_t newGreen = getNthByte(color, 2);
+			uint8_t newBlue = getNthByte(color, 3);
             if (red != newRed || blue != newBlue || green != newGreen) {
                 red = newRed;
                 blue = newBlue;
