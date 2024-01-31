@@ -163,9 +163,9 @@ uint8 newGreen;
 */
 
 			uint32 color = pixels->getPixelColor(0);
-			uint8_t newRed = getNthByte(color, 1);
-			uint8_t newGreen = getNthByte(color, 2);
-			uint8_t newBlue = getNthByte(color, 3);
+			newRed = getNthByte(color, 1);
+			newGreen = getNthByte(color, 2);
+			newBlue = getNthByte(color, 3);
             if (red != newRed || blue != newBlue || green != newGreen) {
                 red = newRed;
                 blue = newBlue;
