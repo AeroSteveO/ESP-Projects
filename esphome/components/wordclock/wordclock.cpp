@@ -73,7 +73,9 @@ int prevLightReading = 0;
 
 
 
-        void WordClock::setup() {
+        void WordClock::setup() override {
+			this->effect_data_ = new uint8_t[this->size()];  
+			
             startStrip();
             clearStrip();
             brightness = 50; // half brightness
@@ -112,8 +114,8 @@ int prevLightReading = 0;
 			return traits;
 		}
 
-		void WordClock::write_state(light::LightState *state) {
-
+		void WordClock::write_state(light::LightState *state) override {
+			show();
 		}
 		
 		

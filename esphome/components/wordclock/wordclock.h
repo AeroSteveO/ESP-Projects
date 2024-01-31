@@ -35,8 +35,8 @@ class WordClock : public light::AddressableLight { // , public Component
 		
 		  void clear_effect_data() override {
 			  // we aren't making use of effects, so nothing to do here
-//			for (int i = 0; i < this->size(); i++)
-//			  this->effect_data_[i] = 0;
+			for (int i = 0; i < this->size(); i++)
+				this->effect_data_[i] = 0;
 		  }
 		  int32_t size() const override { return this->pixels->numPixels(); }
 		  
@@ -45,7 +45,7 @@ class WordClock : public light::AddressableLight { // , public Component
 			uint8_t nthByte = (bytes >> (8*byteToGet)) & 0xff;
 			return nthByte;
 		}
-		
+		uint8_t *effect_data_{nullptr};
 		light::ESPColorView get_view_internal(int32_t index) const override {  // NOLINT
 			uint32 color = pixels->getPixelColor(index);
 			
@@ -56,7 +56,7 @@ class WordClock : public light::AddressableLight { // , public Component
 			
 			//uint8_t *base = this->pixels->getPixels();
 			return light::ESPColorView(&red, &green, &blue,
-				&white, 0, nullptr);
+				&white, this->effect_data_ + index, nullptr);
 		}
 		void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness);
 		void show();
