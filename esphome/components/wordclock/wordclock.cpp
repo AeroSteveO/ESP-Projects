@@ -63,6 +63,9 @@ int iminute = -1;
 uint8_t red = 124;
 uint8_t green = 124;
 uint8_t blue = 124;
+uint8 newRed;
+uint8 newBlue;
+uint8 newGreen;
 
 uint8_t bdred = 0;
 uint8_t bdgreen = 0;
@@ -131,9 +134,6 @@ int prevLightReading = 0;
             bool birthday_changed = false;
             //auto happy_birthday = id(happybirthday).current_values;
 
-uint8 newRed;
-uint8 newBlue;
-uint8 newGreen;
 
             // Brightness set by the light sensor
             //int brightness = 10;//(int)(fastledlight2->get_brightness()*255);
@@ -162,10 +162,10 @@ uint8 newGreen;
             }
 */
 
-			uint32 color = pixels->getPixelColor(0);
-			newRed = getNthByte(color, 1);
-			newGreen = getNthByte(color, 2);
-			newBlue = getNthByte(color, 3);
+			//uint32 color = pixels->getPixelColor(0);
+			//newRed = getNthByte(color, 1);
+			//newGreen = getNthByte(color, 2);
+			//newBlue = getNthByte(color, 3);
             if (red != newRed || blue != newBlue || green != newGreen) {
                 red = newRed;
                 blue = newBlue;
@@ -243,10 +243,10 @@ uint8 newGreen;
 		
 		void WordClock::setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
 			//pixels->setPixelColor(i, pixels->Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
-			pixels->setPixelColor(i, pixels->Color(r , g, b));
-			//red = r;
-			//green = g;
-			//blue = b;
+			//pixels->setPixelColor(i, pixels->Color(r , g, b));
+			newRed = r;
+			newGreen = g;
+			newBlue = b;
 			pixels->setBrightness(uiBrightness);
 			brightness = uiBrightness;
 		}
