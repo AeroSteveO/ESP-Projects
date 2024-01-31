@@ -21,7 +21,7 @@ class WordClock : public light::AddressableLight { // , public Component
         void on_setled(int number, int red, int blue, int green);
 		//void set_output(output::FloatOutput *output) { output_ = output; }
 		void write_state(light::LightState *state) override;
-        void loop() override;
+        void update_time();
 		void dump_config() override;
 		light::AddressableLight *clock_face{nullptr};
 		time::RealTimeClock  *time_id_{nullptr};
