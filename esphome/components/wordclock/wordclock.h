@@ -18,8 +18,7 @@ class WordClock : public light::AddressableLight { // , public Component
     public:
         void update_time();
 		void add_leds(uint8 num_leds, uint8 data_pin) { 
-			Adafruit_NeoPixel pixel(num_leds, data_pin, NEO_GRB + NEO_KHZ800);
-			this->pixels = &pixel; 
+			//this->pixels = new Adafruit_NeoPixel(num_leds, data_pin, NEO_GRB + NEO_KHZ800); 
 		}
 		void set_time_id(time::RealTimeClock *time_id) { this->time_id_ = time_id; }
 
@@ -30,7 +29,7 @@ class WordClock : public light::AddressableLight { // , public Component
 		void write_state(light::LightState *state) override;
 		void dump_config() override;
 
-		int32_t size() const override { return this->pixels->numPixels(); }
+		int32_t size() const override { return this->pixels.numPixels(); }
 		void clear_effect_data() override {
 			// we aren't making use of effects, so nothing to do here
 			for (int i = 0; i < this->size(); i++) {
@@ -39,7 +38,7 @@ class WordClock : public light::AddressableLight { // , public Component
 		}
 		  
 	protected:
-		Adafruit_NeoPixel *pixels{nullptr}; //(NUM_LEDS, DATA_PIN, NEO_GRB + NEO_KHZ800);
+		Adafruit_NeoPixel pixels(NUM_LEDS, DATA_PIN, NEO_GRB + NEO_KHZ800);
 		uint8_t *effect_data_{nullptr};
 		time::RealTimeClock  *time_id_{nullptr};
 
@@ -50,7 +49,7 @@ class WordClock : public light::AddressableLight { // , public Component
 		
 		
 		light::ESPColorView get_view_internal(int32_t index) const override {  // NOLINT
-			uint32 color = pixels->getPixelColor(index);
+			uint32 color = pixels.getPixelColor(index);
 			
 			uint8_t white = getNthByte(color, 0);
 			uint8_t red = getNthByte(color, 1);
