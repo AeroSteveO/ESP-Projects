@@ -17,7 +17,7 @@ int thinking[][2] = {
     {2, 36}, // I: 9
     {92, 53}, // N: 8
     {10, 119}, // K: 2
-    {46, 95}, // I: 9
+    {45, 95}, // I: 9
     {11, 32}, // N: 8
     {110, 49}  // G: 2
 };
@@ -76,26 +76,32 @@ int prevLightReading = 0;
 
 
 
-        void WordClock::setup() {
-			for (int i = 0; i < this->size(); i++) {
-			  (*this)[i] = Color(0, 0, 0, 0);
-			}
-			this->effect_data_ = new uint8_t[this->size()];  
-			
-            startStrip();
-            clearStrip();
-            brightness = 50; // half brightness
+    void WordClock::setup() {
+        ESP_LOGI("Setup", "WordClock Setup Started!");
+        // What is this doing? i copied it from neopixelbus but really have no idea what the purpose is
+        // for (int i = 0; i < this->size(); i++) {
+        //     (*this)[i] = Color(0, 0, 0, 0);
+        // }
+        this->effect_data_ = new uint8_t[this->size()];  
+        
+        startStrip();
+        clearStrip();
+        brightness = 50; // half brightness
 
-            // Start all LED with on and default color and brightness to check if everything is working...
-            for(int i = 0; i < NUM_LEDS; i++) { setPixelColor(i, red, 0, 0, brightness); show(); delay(10); }
-            for(int i = 0; i < NUM_LEDS; i++) { setPixelColor(i, 0, green, 0, brightness); show(); delay(10); }
-            for(int i = 0; i < NUM_LEDS; i++) { setPixelColor(i, 0, 0, blue, brightness); show(); delay(10); }
-            for(int i = 0; i < NUM_LEDS; i++) { setPixelColor(i, 0, 0, 0, brightness); }
-            show();
-            randomSeed(analogRead(0));
-            //register_service(&WordClock::on_setled, "setled", {"number","red", "blue", "green"});
-            Serial.println("WordClock Setup Complete!");
-        }
+        int size = this->size();
+
+        // Start all LED with on and default color and brightness to check if everything is working...
+        for(int i = 0; i < size; i++) { setPixelColor(i, red, 0, 0, brightness); show(); delay(10); }
+        for(int i = 0; i < size; i++) { setPixelColor(i, 0, green, 0, brightness); show(); delay(10); }
+        for(int i = 0; i < size; i++) { setPixelColor(i, 0, 0, blue, brightness); show(); delay(10); }
+        for(int i = 0; i < size; i++) { setPixelColor(i, 0, 0, 0, brightness); }
+        show();
+        randomSeed(analogRead(0));
+        //register_service(&WordClock::on_setled, "setled", {"number","red", "blue", "green"});
+        // Serial.println("WordClock Setup Complete!");
+        ESP_LOGI("Setup", "WordClock Setup Complete!");
+
+    }
 		
 //        void WordClock::on_setled(int number, int red, int blue, int green) {
 //
@@ -132,6 +138,8 @@ int prevLightReading = 0;
             int m = time.minute;
             bool isChanged = false;
             bool birthday_changed = false;
+            int size = this->size();
+
             //auto happy_birthday = id(happybirthday).current_values;
 
 
@@ -219,7 +227,7 @@ int prevLightReading = 0;
                         tmp_hour = tmp_hour % 12;
                         int minutessum = iminute % 5;
                         // Reset all LED
-                        for(int i = 0; i < NUM_LEDS; i++) {  setPixelColor(i, 0, 0, 0, scaledBrightness); }
+                        for(int i = 0; i < size; i++) {  setPixelColor(i, 0, 0, 0, scaledBrightness); }
 
 /* if (bdBrightness > 10) {
                 for (int j = 0; j < 2; j++)
@@ -241,15 +249,22 @@ int prevLightReading = 0;
             }
         }
 		
+        // void WordClock::setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
+		// 	pixels->setPixelColor(i, pixels->Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
+		// 	pixels->setPixelColor(i, pixels->Color(r , g, b));
+        //     show();
+		// }
+
 		void WordClock::setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
-			//pixels->setPixelColor(i, pixels->Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
-			//pixels->setPixelColor(i, pixels->Color(r , g, b));
-			ESP_LOGI("setPixelColor", "Changing Colors");
-			newRed = r;
-			newGreen = g;
-			newBlue = b;
-			pixels->setBrightness(uiBrightness);
-			brightness = uiBrightness;
+			// pixels->setPixelColor(i, pixels->Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
+			pixels->setPixelColor(i, pixels->Color(r , g, b));
+			show();
+            ESP_LOGI("setPixelColor", "Changing Colors");
+			// newRed = r;
+			// newGreen = g;
+			// newBlue = b;
+			// pixels->setBrightness(uiBrightness);
+			// brightness = uiBrightness;
 		}
 		void WordClock::show() {
 			pixels->show();

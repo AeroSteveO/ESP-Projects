@@ -16,25 +16,24 @@ namespace wordclock {
 	
 class WordClock : public light::AddressableLight { // , public Component
     public:
-        void setup() override;
-        //void on_setled(int number, int red, int blue, int green);
-		light::LightTraits get_traits() override;
-		void write_state(light::LightState *state) override;
         void update_time();
-		void dump_config() override;
-		
-		
-		
 		void add_leds(uint8 num_leds, uint8 data_pin) { pixels = new Adafruit_NeoPixel(num_leds, data_pin, NEO_GRB + NEO_KHZ800); }
 		void set_time_id(time::RealTimeClock *time_id) { this->time_id_ = time_id; }
+
 		
 		
-		void clear_effect_data() override {
-			  // we aren't making use of effects, so nothing to do here
-			for (int i = 0; i < this->size(); i++)
-				this->effect_data_[i] = 0;
-		}
+        void setup() override;
+		light::LightTraits get_traits() override;
+		void write_state(light::LightState *state) override;
+		void dump_config() override;
+
 		int32_t size() const override { return this->pixels->numPixels(); }
+		void clear_effect_data() override {
+			// we aren't making use of effects, so nothing to do here
+			for (int i = 0; i < this->size(); i++) {
+				this->effect_data_[i] = 0;
+			}
+		}
 		  
 	protected:
 		Adafruit_NeoPixel *pixels; //(NUM_LEDS, DATA_PIN, NEO_GRB + NEO_KHZ800);
