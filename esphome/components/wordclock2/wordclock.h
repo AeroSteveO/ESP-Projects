@@ -328,7 +328,7 @@ class WordClockRBGWLightOutput : public WordClockLightOutputBase<T_METHOD, T_COL
   }
 };
 
-}  // namespace neopixelbus
+}  // namespace wordclock2
 }  // namespace esphome
 
 #endif  // USE_ARDUINO
