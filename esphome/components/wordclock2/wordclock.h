@@ -161,7 +161,7 @@ class WordClockLightOutputBase : public light::AddressableLight {
     this->rgb_offsets_[2] = (u_order >> 2) & 0b11;
     this->rgb_offsets_[3] = (u_order >> 0) & 0b11;
   }
-	void WordClock::update_time() {
+	void update_time() {
 
 		ESPTime time = time_id_->now();
 		int h = time.hour;
@@ -285,7 +285,7 @@ class WordClockLightOutputBase : public light::AddressableLight {
         //     show();
 		// }
 
-	void WordClock::setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
+	void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
 		// pixels->setPixelColor(i, pixels->Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
 		controller_->SetPixelColor(i, new RgbColor(r , g, b));
 		show();
@@ -296,11 +296,11 @@ class WordClockLightOutputBase : public light::AddressableLight {
 		// pixels->setBrightness(uiBrightness);
 		// brightness = uiBrightness;
 	}
-	void WordClock::show() {
+	void show() {
 		controller_->Show();
 	}
 
-	void WordClock::clearStrip() {
+	void clearStrip() {
 		controller_->ClearTo(new RgbColor(0,0,0));
 	}
 
