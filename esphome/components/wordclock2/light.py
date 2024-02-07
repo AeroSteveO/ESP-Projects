@@ -37,7 +37,7 @@ from .const import (
     ONE_WIRE_CHIPS,
 )
 
-neopixelbus_ns = cg.esphome_ns.namespace("wordclock")
+neopixelbus_ns = cg.esphome_ns.namespace("wordclock2")
 WordClockLightOutputBase = neopixelbus_ns.class_(
     "WordClockLightOutputBase", light.AddressableLight
 )

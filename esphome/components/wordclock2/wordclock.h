@@ -12,7 +12,7 @@
 #include "NeoPixelBus.h"
 
 namespace esphome {
-namespace wordclock {
+namespace wordclock2 {
 
 enum class ESPNeoPixelOrder {
   GBWR = 0b11000110,
