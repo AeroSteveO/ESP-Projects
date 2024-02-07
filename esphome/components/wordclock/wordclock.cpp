@@ -88,7 +88,7 @@ int prevLightReading = 0;
         clearStrip();
         brightness = 50; // half brightness
 
-        int size = pixels->size();
+        int size = pixels->numPixels();
 
         // Start all LED with on and default color and brightness to check if everything is working...
         for(int i = 0; i < size; i++) { setPixelColor(i, red, 0, 0, brightness); show(); delay(10); }
