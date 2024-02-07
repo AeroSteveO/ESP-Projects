@@ -22,9 +22,9 @@ async def to_code(config):
     await light.register_light(var, config)
     await cg.register_component(var, config)
     
-    if CONF_TIME_ID in config:
-        time_ = await cg.get_variable(config[CONF_TIME_ID])
-        cg.add(var.set_time_id(time_))
+    # if CONF_TIME_ID in config:
+    #     time_ = await cg.get_variable(config[CONF_TIME_ID])
+    #     cg.add(var.set_time_id(time_))
     
     if CONF_PIN in config:
         cg.add(var.add_leds(config[CONF_NUM_LEDS], config[CONF_PIN]))
