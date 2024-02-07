@@ -88,14 +88,14 @@ int prevLightReading = 0;
         clearStrip();
         brightness = 50; // half brightness
 
-        int size = this->size();
+        int size = pixels->size();
 
         // Start all LED with on and default color and brightness to check if everything is working...
-        // for(int i = 0; i < size; i++) { setPixelColor(i, red, 0, 0, brightness); show(); delay(10); }
-        // for(int i = 0; i < size; i++) { setPixelColor(i, 0, green, 0, brightness); show(); delay(10); }
-        // for(int i = 0; i < size; i++) { setPixelColor(i, 0, 0, blue, brightness); show(); delay(10); }
-        // for(int i = 0; i < size; i++) { setPixelColor(i, 0, 0, 0, brightness); }
-        // show();
+        for(int i = 0; i < size; i++) { setPixelColor(i, red, 0, 0, brightness); show(); delay(10); }
+        for(int i = 0; i < size; i++) { setPixelColor(i, 0, green, 0, brightness); show(); delay(10); }
+        for(int i = 0; i < size; i++) { setPixelColor(i, 0, 0, blue, brightness); show(); delay(10); }
+        for(int i = 0; i < size; i++) { setPixelColor(i, 0, 0, 0, brightness); }
+        show();
         randomSeed(analogRead(0));
         //register_service(&WordClock::on_setled, "setled", {"number","red", "blue", "green"});
         // Serial.println("WordClock Setup Complete!");
