@@ -34,7 +34,7 @@ class WordClock : public light::AddressableLight { // , public Component
 				this->effect_data_[i] = 0;
 			}
 		}
-		  
+		float get_setup_priority() const override { return setup_priority::HARDWARE; }
 	protected:
 		Adafruit_NeoPixel *pixels{nullptr}; //(NUM_LEDS, DATA_PIN, NEO_GRB + NEO_KHZ800);
 		uint8_t *effect_data_{nullptr};
@@ -47,7 +47,7 @@ class WordClock : public light::AddressableLight { // , public Component
 		
 		
 		light::ESPColorView get_view_internal(int32_t index) const override {  // NOLINT
-			uint32 color = pixels->getPixelColor(index);
+			uint32_t color = pixels->getPixelColor(index);
 			
 			uint8_t white = getNthByte(color, 0);
 			uint8_t red = getNthByte(color, 1);
