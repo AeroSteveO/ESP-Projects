@@ -79,9 +79,9 @@ int prevLightReading = 0;
     void WordClock::setup() {
         ESP_LOGI("Setup", "WordClock Setup Started!");
         // What is this doing? i copied it from neopixelbus but really have no idea what the purpose is
-        for (int i = 0; i < this->size(); i++) {
-            (*this)[i] = Color(0, 0, 0, 0);
-        }
+        // for (int i = 0; i < this->size(); i++) {
+        //     (*this)[i] = Color(0, 0, 0, 0);
+        // }
         this->effect_data_ = new uint8_t[this->size()];  
         
         startStrip();
@@ -170,7 +170,7 @@ int prevLightReading = 0;
             }
 */
 
-			//uint32 color = pixels.getPixelColor(0);
+			//uint32 color = pixels->getPixelColor(0);
 			//newRed = getNthByte(color, 1);
 			//newGreen = getNthByte(color, 2);
 			//newBlue = getNthByte(color, 3);
@@ -250,32 +250,32 @@ int prevLightReading = 0;
         }
 		
         // void WordClock::setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
-		// 	pixels.setPixelColor(i, pixels.Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
-		// 	pixels.setPixelColor(i, pixels.Color(r , g, b));
+		// 	pixels->setPixelColor(i, pixels->Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
+		// 	pixels->setPixelColor(i, pixels->Color(r , g, b));
         //     show();
 		// }
 
 		void WordClock::setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
-			// pixels.setPixelColor(i, pixels.Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
-			pixels.setPixelColor(i, pixels.Color(r , g, b));
+			// pixels->setPixelColor(i, pixels->Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
+			pixels->setPixelColor(i, pixels->Color(r , g, b));
 			show();
             ESP_LOGI("setPixelColor", "Changing Colors");
 			// newRed = r;
 			// newGreen = g;
 			// newBlue = b;
-			// pixels.setBrightness(uiBrightness);
+			// pixels->setBrightness(uiBrightness);
 			// brightness = uiBrightness;
 		}
 		void WordClock::show() {
-			pixels.show();
+			pixels->show();
 		}
 
 		void WordClock::startStrip() {
-			pixels.begin();
+			pixels->begin();
 		}
 
 		void WordClock::clearStrip() {
-			pixels.clear();
+			pixels->clear();
 		}
 
 } // namespace WordClock
