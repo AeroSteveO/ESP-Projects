@@ -17,7 +17,7 @@ namespace wordclock {
 class WordClock : public light::AddressableLight { // , public Component
     public:
         void update_time();
-		void add_leds(uint8 num_leds, uint8 data_pin) { pixels = new Adafruit_NeoPixel(num_leds, data_pin, NEO_GRB + NEO_KHZ800); }
+		void add_leds(uint8 num_leds, uint8 data_pin) { this->pixels = new Adafruit_NeoPixel(num_leds, data_pin, NEO_GRB + NEO_KHZ800); }
 		void set_time_id(time::RealTimeClock *time_id) { this->time_id_ = time_id; }
 
 		
