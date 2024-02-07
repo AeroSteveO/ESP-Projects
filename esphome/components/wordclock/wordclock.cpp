@@ -79,9 +79,9 @@ int prevLightReading = 0;
     void WordClock::setup() {
         ESP_LOGI("Setup", "WordClock Setup Started!");
         // What is this doing? i copied it from neopixelbus but really have no idea what the purpose is
-        // for (int i = 0; i < this->size(); i++) {
-        //     (*this)[i] = Color(0, 0, 0, 0);
-        // }
+        for (int i = 0; i < this->size(); i++) {
+            (*this)[i] = Color(0, 0, 0, 0);
+        }
         this->effect_data_ = new uint8_t[this->size()];  
         
         startStrip();
@@ -91,11 +91,11 @@ int prevLightReading = 0;
         int size = this->size();
 
         // Start all LED with on and default color and brightness to check if everything is working...
-        for(int i = 0; i < size; i++) { setPixelColor(i, red, 0, 0, brightness); show(); delay(10); }
-        for(int i = 0; i < size; i++) { setPixelColor(i, 0, green, 0, brightness); show(); delay(10); }
-        for(int i = 0; i < size; i++) { setPixelColor(i, 0, 0, blue, brightness); show(); delay(10); }
-        for(int i = 0; i < size; i++) { setPixelColor(i, 0, 0, 0, brightness); }
-        show();
+        // for(int i = 0; i < size; i++) { setPixelColor(i, red, 0, 0, brightness); show(); delay(10); }
+        // for(int i = 0; i < size; i++) { setPixelColor(i, 0, green, 0, brightness); show(); delay(10); }
+        // for(int i = 0; i < size; i++) { setPixelColor(i, 0, 0, blue, brightness); show(); delay(10); }
+        // for(int i = 0; i < size; i++) { setPixelColor(i, 0, 0, 0, brightness); }
+        // show();
         randomSeed(analogRead(0));
         //register_service(&WordClock::on_setled, "setled", {"number","red", "blue", "green"});
         // Serial.println("WordClock Setup Complete!");
