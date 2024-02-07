@@ -39,12 +39,6 @@ class WordClock : public light::AddressableLight { // , public Component
 		Adafruit_NeoPixel *pixels{nullptr}; //(NUM_LEDS, DATA_PIN, NEO_GRB + NEO_KHZ800);
 		uint8_t *effect_data_{nullptr};
 		time::RealTimeClock  *time_id_{nullptr};
-
-		uint8_t getNthByte(uint32_t bytes, uint8_t byteToGet) const {
-			uint8_t nthByte = (bytes >> (8*byteToGet)) & 0xff;
-			return nthByte;
-		}
-		
 		
 		light::ESPColorView get_view_internal(int32_t index) const override {  // NOLINT
 			uint32_t color = pixels->getPixelColor(index);
@@ -57,6 +51,12 @@ class WordClock : public light::AddressableLight { // , public Component
 			return light::ESPColorView(&red, &green, &blue,
 				&white, this->effect_data_ + index, nullptr);
 		}
+		
+		uint8_t getNthByte(uint32_t bytes, uint8_t byteToGet) const {
+			uint8_t nthByte = (bytes >> (8*byteToGet)) & 0xff;
+			return nthByte;
+		}
+
 		void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness);
 		void show();
 		void startStrip();

@@ -79,9 +79,9 @@ int prevLightReading = 0;
     void WordClock::setup() {
         ESP_LOGI("Setup", "WordClock Setup Started!");
         // What is this doing? i copied it from neopixelbus but really have no idea what the purpose is
-        // for (int i = 0; i < this->size(); i++) {
-        //     (*this)[i] = Color(0, 0, 0, 0);
-        // }
+        for (int i = 0; i < this->size(); i++) {
+            (*this)[i] = Color(0, 0, 0, 0);
+        }
         this->effect_data_ = new uint8_t[this->size()];  
         
         startStrip();
