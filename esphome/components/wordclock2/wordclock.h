@@ -92,6 +92,21 @@ int leds_happy_birthday[][8] = {
     {109, 88, 87, 66, 65, -1, -1, -1}, // happy
     {120, 99, 98, 77, 76, 55, 54, 33} // birthday
 };
+int ihour = -1;
+int iminute = -1;
+uint8_t red = 124;
+uint8_t green = 124;
+uint8_t blue = 124;
+uint8 newRed;
+uint8 newBlue;
+uint8 newGreen;
+
+uint8_t bdred = 0;
+uint8_t bdgreen = 0;
+uint8_t bdblue = 0;
+
+int brightness = 50; // half brightness
+int prevLightReading = 0;
 
 template<typename T_METHOD, typename T_COLOR_FEATURE>
 class WordClockLightOutputBase : public light::AddressableLight {
@@ -116,6 +131,7 @@ class WordClockLightOutputBase : public light::AddressableLight {
     // controller gets initialised in setup() - avoid calling twice (crashes with RMT)
     // this->controller_->Begin();
   }
+		void set_time_id(time::RealTimeClock *time_id) { this->time_id_ = time_id; }
 
   // ========== INTERNAL METHODS ==========
   void setup() override {
@@ -290,6 +306,7 @@ class WordClockLightOutputBase : public light::AddressableLight {
 
  protected:
   NeoPixelBus<T_COLOR_FEATURE, T_METHOD> *controller_{nullptr};
+  time::RealTimeClock  *time_id_{nullptr};
   uint8_t *effect_data_{nullptr};
   uint8_t rgb_offsets_[4]{0, 1, 2, 3};
 };
