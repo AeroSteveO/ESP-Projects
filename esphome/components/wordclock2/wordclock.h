@@ -166,7 +166,7 @@ class WordClockLightOutputBase : public light::AddressableLight, WordClock {
     this->rgb_offsets_[2] = (u_order >> 2) & 0b11;
     this->rgb_offsets_[3] = (u_order >> 0) & 0b11;
   }
-	void update_time() const override {
+	void update_time() {
 
 		ESPTime time = time_id_->now();
 		int h = time.hour;
