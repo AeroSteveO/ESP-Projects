@@ -110,14 +110,14 @@ int prevLightReading = 0;
 
 class WordClock {
 	public:
-		void update_time();
+		virtual void update_time() = 0;
 };
 
 template<typename T_METHOD, typename T_COLOR_FEATURE>
 class WordClockLightOutputBase : public light::AddressableLight, WordClock {
  public:
   NeoPixelBus<T_COLOR_FEATURE, T_METHOD> *get_controller() const { return this->controller_; }
-
+  void set_time_id(time::RealTimeClock *time_id) { this->time_id_ = time_id; }
   void clear_effect_data() override {
     for (int i = 0; i < this->size(); i++)
       this->effect_data_[i] = 0;
@@ -136,7 +136,7 @@ class WordClockLightOutputBase : public light::AddressableLight, WordClock {
     // controller gets initialised in setup() - avoid calling twice (crashes with RMT)
     // this->controller_->Begin();
   }
-		void set_time_id(time::RealTimeClock *time_id) { this->time_id_ = time_id; }
+		
 
   // ========== INTERNAL METHODS ==========
   void setup() override {
