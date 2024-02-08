@@ -111,7 +111,7 @@ int prevLightReading = 0;
 class WordClock {
 	public:
 		void update_time();
-}
+};
 
 template<typename T_METHOD, typename T_COLOR_FEATURE>
 class WordClockLightOutputBase : public light::AddressableLight, WordClock {
