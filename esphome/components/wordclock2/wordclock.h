@@ -108,8 +108,13 @@ uint8_t bdblue = 0;
 int brightness = 50; // half brightness
 int prevLightReading = 0;
 
+class WordClock {
+	public:
+		void update_time();
+}
+
 template<typename T_METHOD, typename T_COLOR_FEATURE>
-class WordClockLightOutputBase : public light::AddressableLight {
+class WordClockLightOutputBase : public light::AddressableLight, WordClock {
  public:
   NeoPixelBus<T_COLOR_FEATURE, T_METHOD> *get_controller() const { return this->controller_; }
 
@@ -161,7 +166,7 @@ class WordClockLightOutputBase : public light::AddressableLight {
     this->rgb_offsets_[2] = (u_order >> 2) & 0b11;
     this->rgb_offsets_[3] = (u_order >> 0) & 0b11;
   }
-	void update_time() {
+	void update_time() const override {
 
 		ESPTime time = time_id_->now();
 		int h = time.hour;
