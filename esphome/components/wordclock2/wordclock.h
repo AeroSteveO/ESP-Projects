@@ -108,13 +108,13 @@ uint8_t bdblue = 0;
 int brightness = 50; // half brightness
 int prevLightReading = 0;
 
-class WordClock : light::AddressableLight {
+class WordClock {
 	public:
 		virtual void update_time() = 0;
 };
 
 template<typename T_METHOD, typename T_COLOR_FEATURE>
-class WordClockLightOutputBase : public WordClock {
+class WordClockLightOutputBase : public light::AddressableLight, public WordClock {
  public:
   NeoPixelBus<T_COLOR_FEATURE, T_METHOD> *get_controller() const { return this->controller_; }
   void set_time_id(time::RealTimeClock *time_id) { this->time_id_ = time_id; }
