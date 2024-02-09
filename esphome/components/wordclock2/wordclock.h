@@ -114,7 +114,7 @@ class WordClock {
 };
 
 template<typename T_METHOD, typename T_COLOR_FEATURE>
-class WordClockLightOutputBase : public light::AddressableLight, public WordClock {
+class WordClockLightOutputBase : public light::AddressableLight, public virtual WordClock {
  public:
   NeoPixelBus<T_COLOR_FEATURE, T_METHOD> *get_controller() const { return this->controller_; }
   void set_time_id(time::RealTimeClock *time_id) { this->time_id_ = time_id; }
