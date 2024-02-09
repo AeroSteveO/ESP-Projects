@@ -114,7 +114,7 @@ class WordClock {
 };
 
 template<typename T_METHOD, typename T_COLOR_FEATURE>
-class WordClockLightOutputBase : public light::AddressableLight, WordClock {
+class WordClockLightOutputBase : public light::AddressableLight {
  public:
   NeoPixelBus<T_COLOR_FEATURE, T_METHOD> *get_controller() const { return this->controller_; }
   void set_time_id(time::RealTimeClock *time_id) { this->time_id_ = time_id; }
@@ -293,7 +293,7 @@ class WordClockLightOutputBase : public light::AddressableLight, WordClock {
 	void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
 		// pixels->setPixelColor(i, pixels->Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
 		controller_->SetPixelColor(i, new RgbColor(r , g, b));
-		show();
+		// show();
 		ESP_LOGI("setPixelColor", "Changing Colors");
 		// newRed = r;
 		// newGreen = g;
