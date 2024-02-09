@@ -114,7 +114,7 @@ class WordClock {
 };
 
 template<typename T_METHOD, typename T_COLOR_FEATURE>
-class WordClockLightOutputBase : public light::AddressableLight {
+class WordClockLightOutputBase : public WordClock, light::AddressableLight {
  public:
   NeoPixelBus<T_COLOR_FEATURE, T_METHOD> *get_controller() const { return this->controller_; }
   void set_time_id(time::RealTimeClock *time_id) { this->time_id_ = time_id; }
@@ -151,8 +151,9 @@ class WordClockLightOutputBase : public light::AddressableLight {
   void write_state(light::LightState *state) override {
     this->mark_shown_();
     this->controller_->Dirty();
-
     this->controller_->Show();
+
+	ESP_LOGI("write_state", "Changing Colors!");
   }
 
   float get_setup_priority() const override { return setup_priority::HARDWARE; }
