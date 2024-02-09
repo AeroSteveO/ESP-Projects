@@ -293,7 +293,7 @@ class WordClockLightOutputBase : public light::AddressableLight, public virtual 
 
 	void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
 		// pixels->setPixelColor(i, pixels->Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
-		controller_->SetPixelColor(i, new RgbColor(r , g, b));
+		controller_->SetPixelColor(i, new RgbColor::RgbColor(r , g, b));
 		// show();
 		ESP_LOGI("setPixelColor", "Changing Colors");
 		// newRed = r;
@@ -307,7 +307,7 @@ class WordClockLightOutputBase : public light::AddressableLight, public virtual 
 	}
 
 	void clearStrip() {
-		controller_->ClearTo(new RgbColor(0,0,0));
+		controller_->ClearTo(new RgbColor::RgbColor(0,0,0));
 	}
 
  protected:
