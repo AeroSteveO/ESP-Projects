@@ -293,7 +293,8 @@ class WordClockLightOutputBase : public wordclock2::WordClock {
 
 	void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
 		// pixels->setPixelColor(i, pixels->Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
-		controller_->SetPixelColor(i, new RgbColor(r , g, b));
+		RgbColor color = new RgbColor(r , g, b);
+		controller_->SetPixelColor(i, color);
 		// show();
 		ESP_LOGI("setPixelColor", "Changing Colors");
 		// newRed = r;
