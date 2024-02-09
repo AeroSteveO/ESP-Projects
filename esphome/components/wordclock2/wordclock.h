@@ -154,7 +154,7 @@ class WordClockLightOutputBase : public light::AddressableLight {
     this->controller_->Dirty();
     this->controller_->Show();
 
-	update_time();
+	// update_time();
 
 	ESP_LOGI("write_state", "Changing Colors!");
 	// this is the one being called
