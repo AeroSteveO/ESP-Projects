@@ -10,6 +10,7 @@
 #include "esphome/components/light/addressable_light.h"
 
 #include "NeoPixelBus.h"
+#include "RgbColor.h"
 
 namespace esphome {
 namespace wordclock2 {
