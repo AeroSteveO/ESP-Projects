@@ -115,7 +115,7 @@ class WordClockFaceUpdate : public virtual light::AddressableLight {
 };
 
 template<typename T_METHOD, typename T_COLOR_FEATURE>
-class WordClockLightOutputBase : public WordClockFaceUpdate {
+class WordClockLightOutputBase : public light::AddressableLight {
  public:
   NeoPixelBus<T_COLOR_FEATURE, T_METHOD> *get_controller() const { return this->controller_; }
   void set_time_id(time::RealTimeClock *time_id) { this->time_id_ = time_id; }
@@ -153,6 +153,8 @@ class WordClockLightOutputBase : public WordClockFaceUpdate {
     this->mark_shown_();
     this->controller_->Dirty();
     this->controller_->Show();
+
+	update_time();
 
 	ESP_LOGI("write_state", "Changing Colors!");
 	// this is the one being called
