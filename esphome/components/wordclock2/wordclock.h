@@ -106,8 +106,8 @@ uint8_t bdred = 0;
 uint8_t bdgreen = 0;
 uint8_t bdblue = 0;
 
-int brightness = 50; // half brightness
-int prevLightReading = 0;
+uint16_t brightness = 50; // half brightness
+uint16_t prevLightReading = 0;
 
 class WordClockFaceUpdate : public virtual light::AddressableLight {
 	public:
@@ -154,7 +154,7 @@ class WordClockLightOutputBase : public light::AddressableLight {
     this->controller_->Dirty();
     this->controller_->Show();
 
-	// update_time();
+	update_time();
 
 	ESP_LOGI("write_state", "Changing Colors!");
 	// this is the one being called
@@ -186,7 +186,7 @@ class WordClockLightOutputBase : public light::AddressableLight {
 		// Brightness set by the light sensor
 		//int brightness = 10;//(int)(fastledlight2->get_brightness()*255);
 		long value = 100; //(long) (id(illuminance).sample() * 500);
-		int scaledBrightness = map(value, 0, 500, 10, brightness);
+		uint16_t scaledBrightness = map(value, 0, 500, 10, brightness);
 		
 		if (10 < abs(scaledBrightness - prevLightReading) ) {
 			isChanged = true;
@@ -297,7 +297,8 @@ class WordClockLightOutputBase : public light::AddressableLight {
 
 	void setPixelColor( uint16_t i, uint8_t r, uint8_t g, uint8_t b, uint16_t uiBrightness) {
 		// pixels->setPixelColor(i, pixels->Color((uiBrightness*r/255) , (uiBrightness*g/255), (uiBrightness*b/255)));
-		controller_->SetPixelColor(i, new RgbColor(r,g,b));
+		// controller_->SetPixelColor(i, new RgbColor(r,g,b));
+		(*this)[i] = Color(r, g, b);
 		// show();
 		ESP_LOGI("setPixelColor", "Changing Colors");
 		// newRed = r;
