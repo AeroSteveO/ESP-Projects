@@ -13,4 +13,5 @@ These are my smaller ESP based projects
 # Other Projects I like
 - [Tag Reader](https://github.com/adonno/tagreader)
 - [Notification Egg](https://github.com/4cello/NotificationEgg)
+- [Weatherman Dashboard](https://github.com/Madelena/esphome-weatherman-dashboard)
 
