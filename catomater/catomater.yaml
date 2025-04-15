@@ -1,0 +1,128 @@
+esphome:
+  name: catomater-1
+  friendly_name: Catomater-1
+  min_version: 2024.11.0
+  name_add_mac_suffix: false
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  services:
+    # goes from about -70 to 100
+    # 70 is facing forward
+  - service: servo_y
+    variables:
+      level: float
+    then:
+      - servo.write:
+          id: servo_y
+          level: !lambda 'return level / 100.0;'
+    # goes from about -80 to 100
+    # 0 is centered
+  - service: servo_x
+    variables:
+      level: float
+    then:
+      - servo.write:
+          id: servo_x
+          level: !lambda 'return level / 100.0;'
+
+# Allow Over-The-Air updates
+ota:
+- platform: esphome
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+output:
+  - platform: ledc
+    id: pwm_1
+    pin: GPIO21
+    frequency: 100 Hz
+  - platform: ledc
+    id: pwm_2
+    pin: GPIO16
+    frequency: 100 Hz
+
+servo:
+  - id: servo_y
+    output: pwm_1
+    # transition_length: "10s"
+    auto_detach_time: 1s
+  - id: servo_x
+    output: pwm_2
+    # transition_length: "10s"
+    auto_detach_time: 1s
+
+# input_number:
+  # x_servo_control:
+    # initial: 0
+    # min: -100
+    # max: 100
+    # step: 1
+    # mode: slider
+  # y_servo_control:
+    # initial: 0
+    # min: -100
+    # max: 100
+    # step: 1
+    # mode: slider
+
+# Example configuration entry
+switch:
+  - platform: gpio
+    id: laser
+    pin: 
+      number: GPIO17
+      mode:
+        output: true
+    name: "Laser Pointer"
+    internal: true
+    
+    restore_mode: ALWAYS_OFF
+  - platform: template
+    name: "Laser Pointer"
+    lambda: |-
+      if (id(laser).state) {
+        return true;
+      } else {
+        return false;
+      }
+    turn_on_action:
+      - switch.turn_on: laser
+    turn_off_action:
+      - switch.turn_off: laser
+    assumed_state: false
+
+binary_sensor:
+  - platform: status
+    name: "Catomater Status"
+  # - platform: homeassistant
+  #   id: switch1
+  #   entity_id: input_boolean.switch1
+  #   internal: true
+# alias: Cat Laser - Park position
+# sequence:
+#  - service: switch.turn_off
+#    data: {}
+#    target:
+#      entity_id: switch.cat_laser_laser_pointer
+#  - variables:
+#      park_x: -25
+#      park_y: 75
+#  - service: esphome.cat_laser_servo_x
+#    data:
+#       level: "{{ park_x }}"
+#  - service: esphome.cat_laser_servo_y
+#    data:
+#       level: "{{ park_y }}"
+# mode: single
+# icon: mdi:cat
