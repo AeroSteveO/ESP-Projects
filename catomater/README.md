@@ -23,3 +23,32 @@
  mode: single
  icon: mdi:cat
 ```
+
+
+```
+catomater_chase_random:
+  sequence:
+  - type: turn_on
+    device_id: 6ac61b39529d9e93ee952a0b25bada3f
+    entity_id: e0426929e5e2700f510bd5037ace1315
+    domain: switch
+  - repeat:
+      count: 50
+      sequence:
+      - action: esphome.catomater_1_servo_x
+        data:
+          level: '{{ range(-80, 100) | random |int}}'
+      - action: esphome.catomater_1_servo_y
+        data:
+          level: '{{ range(-70, 100) | random |int}}'
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 0
+          milliseconds: 500
+  - action: script.catomater_park
+    metadata: {}
+    data: {}
+  alias: Catomater - Chase Random
+  description: ''
+```
